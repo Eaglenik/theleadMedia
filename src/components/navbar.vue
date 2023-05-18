@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar">
       <div class="d-sm-none d-flex justify-content-between mb-3 w-100">
-        <a href="/"><img src="../../public/images/logo-mobile.png" alt=""></a>
+        <a href="/"><img src="../assets/images/logo-mobile.png" alt=""></a>
         <div class="navbar-contact_mobile d-inline-flex gap-3">
           <a href="#!" class="active">Ру</a>
           <a href="#!">O‘z</a>
@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="d-flex justify-content-sm-center justify-content-between align-items-center w-100">
-          <a href="/" class="d-sm-block d-none"><img src="../../public/images/logo.png" alt=""></a>
+          <a href="/" class="d-sm-block d-none"><img src="../assets/images/logo.png" alt=""></a>
           <div class="d-flex justify-content-center align-items-center">
             <div class="sidebar d-xxl-none d-flex">
               <button class="burger" @click="toggleSidebar">
@@ -94,8 +94,8 @@
           </div>
           <div class="navbar-contact">
               <a href="tel:+998 99 498 32 12" class="d-lg-block d-none">+998 99 498 32 12</a>
-              <a href="#!"><img src="../../public/images/icons/phone.svg" alt=""></a>
-              <a href="#!"><img src="../../public/images/icons/telegram.svg" alt=""></a>
+              <a href="#!"><img src="../assets/images/icons/phone.svg" alt=""></a>
+              <a href="#!"><img src="../assets/images/icons/telegram.svg" alt=""></a>
           </div>
       </div>
     </nav>
