@@ -167,12 +167,12 @@
                 <h5 class="title"><span>Другие</span> проекты компании</h5>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                 <div class="projects-cards d-flex justify-content-between flex-wrap gap-5">
-                    <a href="#!" class="project-card" style="background:radial-gradient(72.63% 76.45% at 78.31% 10.82%, #FFED00 0%, #FC9D03 100%);">
+                    <router-link :tag="div" :to="'/project/1'" class="project-card" style="background:radial-gradient(72.63% 76.45% at 78.31% 10.82%, #FFED00 0%, #FC9D03 100%);" >
                         <img src="@/assets/images/projects/projects1.png" alt="">
                         <p><span>PC.uz </span>— уникальный по структуре и максимально простой в обращении цифровой IT-рынок Узбекистана<br><br>
                         Тщательная сортировка по разделам и категориям позволит вам в считанные минуты найти именно то, что вам нужно</p>
                         <img src="@/assets/images/services-card/services-chevrone.svg" alt="">
-                    </a>
+                    </router-link>
                     <a href="#!" class="project-card" style="background:radial-gradient(67.44% 74.61% at 27.61% 88.39%, #FD8F95 0%, #F00037 100%);">
                         <img src="@/assets/images/projects/projects2.png" alt="">
                         <p><span>StroyVitrina.uz</span> — строительный Интернет-портал<br><br>

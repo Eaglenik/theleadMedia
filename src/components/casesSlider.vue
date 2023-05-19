@@ -46,8 +46,8 @@ export default defineComponent({
     cards: [
       {
         image: require('@/assets/images/cases/case (1).png'),
-        title: 'Card 1 Title',
-        text: 'Card 1 description',
+        title: 'dildorakasimova.com',
+        text: 'Разработка сайта',
         link: '/page1',
       },
       {
