@@ -52,35 +52,35 @@
             title="<span>Создание</span> WEB-сайтов" 
             price=" 10 000 000 сум/сайт" 
             description="Предлагаем услуги профессиональной разработки сайтов в Ташкенте. Над созданием интернет-магазинов, корпоративных проектов и других ресурсов работают квалифицированные специалисты с большим опытом."
-            image="../assets/images/services-card/services-card_img7.png"/>
+            image="services-card_img7.png"/>
         <services-card
             title="SEO<span>-продвижение</span>" 
             price=" 4 000 000 сум/мес" 
             description="Search Engine Optimization (поисковая оптимизация) представляет собой один из распространенных способов привлечения пользователей на сайты.
             Результат достигается за счет повышения позиций ресурса в выдаче поисковых систем."
-            image="/assets/images/services-card/services-card_img7.png"/>
+            image="services-card_img1.png"/>
         <services-card
             title="Контекстная реклама <span>в Google и Яндекс</span>" 
             price=" 2 000 000 сум/мес" 
             description="Профессиональные услуги контекстной рекламы в Узбекистане.
             Работы проводят квалифицированные специалисты."
-            image="/assets/images/services-card/services-card_img7.png"/>
+            image="services-card_img2.png"/>
         <services-card
             title="<span>Продвижение на</span> GoogleMaps " 
             price=" 1 000 000 сум/мес" 
             description="Профессиональные услуги контекстной рекламы в Узбекистане.
             Работы проводят квалифицированные специалисты."
-            image="/assets/images/services-card/services-card_img7.png"/>
+            image="services-card_img3.png"/>
         <services-card
             title="<span>Продвижение на</span> Яндекс.Карты" 
             price=" 500 000 сум/мес" 
             description="Предлагаем услуги профессиональной разработки сайтов в Ташкенте. Над созданием интернет-магазинов, корпоративных проектов и других ресурсов работают квалифицированные специалисты с большим опытом."
-            image="/assets/images/services-card/services-card_img7.png"/>
+            image="services-card_img4.png"/>
         <services-card
             title="<span>Услуги</span> копирайтинга" 
             price=" 50 000 сум/ 1 000 знаков" 
             description="Предлагаем услуги профессиональной разработки сайтов в Ташкенте. Над созданием интернет-магазинов, корпоративных проектов и других ресурсов работают квалифицированные специалисты с большим опытом."
-            image="/assets/images/services-card/services-card_img7.png"/>
+            image="services-card_img5.png"/>
        </section>
        <div class="line"></div> 
        <section class="request-back">
@@ -192,6 +192,8 @@
                         <img src="@/assets/images/services-card/services-chevrone.svg" alt="">
                     </a>
                 </div>
+                <h5 class="title"><span>Реализованные</span> кейсы</h5>
+                <casesSlider></casesSlider>
             </div>
        </section>
     </div>
@@ -202,6 +204,7 @@ import navbar from '@/components/navbar.vue'
 import mainButton from '@/components/UI/mainButton.vue'
 import packageCard from '@/components/packageCard.vue'
 import servicesCard from '@/components/servicesCard.vue'
+import casesSlider from '@/components/casesSlider.vue'
 
 export default {
     components: {
@@ -209,6 +212,7 @@ export default {
         mainButton,
         packageCard,
         servicesCard,
+        casesSlider
     },
     data() {
         return{
@@ -398,89 +402,6 @@ export default {
         color: white;
         font-weight: 500;
     }
-    /* services cards */
-    .services{
-        gap: 50px;
-    }
-    .services-card{
-        background: var(--gradRadial2);
-        width: 48%;
-        padding: 30px 50px 70px 50px;
-        border: 3px solid transparent;
-        border-image:  linear-gradient(22.06deg, #1C7095 0%, #0E1531 100%);
-        border-image-slice: 1;
-    }
-    .services-card_img{
-        position: relative;
-        min-height: 350px;
-        margin-bottom: 15px;
-    }
-    .services-card_img img{
-        position: absolute;
-        width: 100%;
-    }
-    .services-card_img img:first-of-type{
-        mix-blend-mode: overlay;
-        left: 0;
-        top: 20px;
-        max-width: 470px;
-        opacity: 0.6;
-    }
-    .services-card_img img:last-of-type{
-        right: 0;
-        top: 0;
-        max-width: 520px;
-    }
-    .services-card h2{
-        font-size: 44px;
-        line-height: 53px;
-        font-weight: 600;
-        margin-bottom: 30px;
-    }
-    .services-card h2 span{
-        font-weight: 600;
-        color: var(--btnRed2);
-    }
-    .services-card p{
-        font-size: 22px;
-        line-height: 31px;
-        color: var(--textBlue1);
-    }
-    .services-card p span{
-        font-size: 30px;
-        line-height: 42px;
-        font-weight: 600;
-        color: white;
-    }
-    .services-card p:last-of-type{
-        margin-top: 20px;
-        margin-bottom: 40px;
-    }
-    .services-card_links{
-        flex-wrap: wrap;
-        row-gap: 40px;
-    }
-    .services-card_links a{
-        font-size: 22px;
-        line-height: 31px;
-        color: var(--textBlue2);
-        margin-right: 20px;
-    }
-    .services-card_links button,
-    .package-card button,
-    .individual-card_footer button{
-        background: none;
-        font-size: 22px;
-        line-height: 31px;
-        color: var(--btnRed2);
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        border: 1px solid var(--btnRed2);
-        padding: 21px 30px;
-        outline: none;
-        font-weight: 600;
-    }
     /* request */
     .request-back{
         background: var(--gradVertical);
@@ -668,6 +589,9 @@ export default {
     .project-card p span{
         font-weight: 600;
     }
+    .projects-cards{
+        margin-bottom: 110px;
+    }
 
     /* media */
     @media (max-width:1400px){
@@ -687,7 +611,7 @@ export default {
         .header-text p{
             margin: 35px 0 45px 0;
         }
-        .services-card_img img:first-of-type{
+        .services-card_img img:first-of-type{   
             max-width: 355px;
         }
         .services-card_img img:last-of-type{
@@ -760,32 +684,6 @@ export default {
             font-size: 28px;
             line-height: 40px;
         }
-        .services-card_img img:first-of-type{
-            max-width: 272px;
-        }
-        .services-card_img img:last-of-type{
-            max-width: 310px;
-        }
-        .services-card_img{
-            min-height: 200px;
-        }
-        .services-card h2{
-            font-size: 40px;
-            line-height: 48px;
-        }
-        .services-card p{
-            font-size: 20px;
-            line-height: 28px;
-        }
-        .services-card p span{
-            font-size: 28px;
-            line-height: 39px;
-        }
-        .services-card_links a,
-        .services-card_links button{
-            font-size: 20px;
-            line-height: 28px;
-        }
         .request-task h6{
             font-size: 40px;
             line-height: 48px;
@@ -820,19 +718,6 @@ export default {
         .header-text p{
             max-width: unset;
         }
-        .services-card{
-            width: 100%;
-        }
-        .services-card_img img:last-of-type{
-            left: 0;
-            max-width: 480px;
-        }
-        .services-card_img img:first-of-type{
-            max-width: 410px;
-        }
-        .services-card_img{
-            min-height: 300px;
-        }
         .request-task, .request-form_wrapper{
             width: 100%;
         }
@@ -862,9 +747,6 @@ export default {
         .header-text p{
             font-size: 26px;
             line-height: 36px;
-        }
-        .services-card_img img:last-of-type{
-            left: unset;
         }
         .request-task_text{
             width: 100%;
@@ -934,35 +816,6 @@ export default {
         }
         .synopsis{
             margin-top: 50px;
-        }
-        .services-card_img img:last-of-type{
-            max-width: 260px;
-        }
-        .services-card_img img:first-of-type{
-            max-width: 209px;
-        }
-        .services-card_img{
-            min-height: 150px;
-        }
-        .services-card{
-            padding: 20px 10px;
-        }
-        .services-card h2{
-            font-size: 30px;
-            line-height: 40px;
-            margin-bottom: 20px;
-        }
-        .services-card p,
-        .services-card_links a, .services-card_links button{
-            font-size: 18px;
-            line-height: 25px;
-        }
-        .services-card p span{
-            font-size: 22px;
-            line-height: 31px;
-        }
-        .services-card_links button{
-            width: 100%;
         }
         .line{
             margin: 60px 0 40px 0;
