@@ -1,38 +1,41 @@
 <template>
     <div class="services-card">
       <div class="services-card_img">
-        <img src="../assets/images/services-card/services-card_arr.png" alt="">
+        <img src="@/assets/images/services-card/services-card_arr.png" alt="">
         <img :src="require(`@/assets/images/services-card/${image}`)" alt="">
       </div>
       <h2 v-html="titleWithSpan"></h2>
       <p>от <span> {{ price }}</span></p>
       <p class="services-description">{{ description }}</p>
       <div class="services-card_links d-flex align-items-center justify-content-between w-100">
-        <a href="#!">Узнать больше <img src="../assets/images/services-card/services-chevrone.svg" alt=""></a>
-        <button>Оставить заявку</button>    
+        <router-link :to="link">Узнать больше <img src="@/assets/images/services-card/services-chevrone.svg" alt=""></router-link>
+        <button>Оставить заявку</button>
       </div>
     </div>
   </template>
-  
-  <script>
-  export default {
-    name: 'ServicesCard',
-    props: {
-      title: String,
-      price: String,
-      description: String,
-      image: String
-    },
-    computed: {
+<script>
+export default {
+  name: 'ServicesCard',
+  props: {
+    title: String,
+    price: String,
+    description: String,
+    image: String,
+    slug: String,
+  },
+  computed: {
     titleWithSpan() {
-      const markedTitle = this.title.replace('[start]', '<span>').replace('[end]', '</span>');
+      const markedTitle = this.title.replace('[start]', '<>').replace('[end]', '</ span>');
       return markedTitle;
+    },
+    link() {
+      return `/services/${this.slug}`;
     }
   }
-  }
-  </script>
+}
+</script>
   <style>
-.services{
+    .services{
         gap: 50px;
     }
     .services-card{
@@ -116,22 +119,6 @@
     }
 
     @media (max-width:1400px){
-        .header{
-            height: 570px;
-        }
-        .mainHeader{
-            max-width: 684px;
-            top: 53px;
-        }
-        .topHeader{
-            max-height: 280px;
-        }
-        .header-text{
-            margin-top: 44px;
-        }
-        .header-text p{
-            margin: 35px 0 45px 0;
-        }
         .services-card_img img:first-of-type{
             max-width: 355px;
         }
@@ -146,9 +133,6 @@
         }
         .services{
             gap: 40px;
-        }
-        .request-task_img{
-        height: 650px;
         }
     }
     @media (max-width:1200px){
@@ -208,6 +192,7 @@
         }
         .services-card_img{
             min-height: 150px;
+            margin-bottom: 35px;
         }
         .services-card{
             padding: 20px 10px;
