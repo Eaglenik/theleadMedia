@@ -104,7 +104,7 @@
         </section>
         <section class="packages my-container">
              <h5 class="title"><span>Комплексные</span> пакеты</h5>
-             <div class="packegaes-cards d-flex justify-content-between">
+             <div class="packegaes-cards d-flex justify-content-between flex-wrap">
                  <package-card title="Business" price="30 000 000 сум" :items="['Создание лендинг-страницы', 'Duis aute irure dolor in reprehenderit', 'Voluptate velit esse cillum', 'Dolore eu fugiat nulla pariatur', 'Excepteur sint occaecat cupidatat', 'Nisi ut aliquip ex ea commodo consequat']"></package-card>
                  <package-card title="Optimal" price="50 000 000 сум" :items="['Создание web-сайта с уникальным дизайном', 'Lorem ipsum dolor sit amet', 'Consectetur adipiscing elit', 'Sed do eiusmod tempor incididunt', 'Ut labore et dolore magna aliqua', 'Ut enim ad minim veniam']"></package-card>
                  <package-card title="Premium" price="100 000 000 сум" :items="['Создание web-сайта на шаблоне', 'Sed ut perspiciatis unde', 'But who has any right', 'Nor again is there anyone', 'But who has any right', 'Sed ut perspiciatis unde']"></package-card>
@@ -112,7 +112,7 @@
                  <form action="URL" class="package-card package-card_form w-100">
                      <h6>Индивидуальный пакет</h6>
                      <p>Свяжитесь с нами и мы подберем для вашего проекта оптимальный набор услуг</p>
-                     <div class="individual-card_inpts d-flex justify-content-between">
+                     <div class="individual-card_inpts d-flex justify-content-between flex-wrap">
                          <div class="request-form_inpt">
                              <p>Имя*</p>
                              <input type="text" name="individualFormName" required>
@@ -126,9 +126,9 @@
                              <input type="text" name="individualFromYoursProject" required>
                          </div>
                      </div>
-                     <div class="individual-card_footer d-flex justify-content-between align-items-center">
-                         капча
-                         <div class="d-flex align-items-center gap-4">
+                     <div class="individual-card_footer flex-lg-row flex-column-reverse d-flex justify-content-between align-items-lg-center align-items-start gap-md-0 gap-4">
+                         <div>капча</div>
+                         <div class="d-flex flex-md-row flex-column align-items-md-center align-items-start gap-4">
                              <p>Нажимая на кнопку «Оставить заявку», вы даете согласие на обработку персональных данных</p>
                              <button>Оставить заявку</button>
                          </div>
@@ -140,7 +140,7 @@
                  <div class="projects my-container">
                      <h5 class="title"><span>Другие</span> проекты компании</h5>
                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                     <div class="projects-cards d-flex justify-content-between flex-wrap gap-5">
+                     <div class="projects-cards d-flex justify-content-between flex-wrap">
                          <router-link to="/projects/pc.uz" class="project-card" style="background:radial-gradient(72.63% 76.45% at 78.31% 10.82%, #FFED00 0%, #FC9D03 100%);" >
                              <img src="@/assets/images/projects/projects1.png" alt="">
                              <p><span>PC.uz </span>— уникальный по структуре и максимально простой в обращении цифровой IT-рынок Узбекистана<br><br>
@@ -170,6 +170,68 @@
                      <casesSlider></casesSlider>
                  </div>
         </section>
+        <section class="advantages my-container">
+            <h6 class="title">Преимущества</h6>
+            <div class="advantages-content d-flex flex-wrap justify-content-between gap-1">
+                <div class="advantages-block">
+                    <div class="advantages-block_img">
+                        <img src="@/assets/images/chevrone.png" alt="">
+                        <span>1</span>
+                    </div>
+                    <h6>Широкий спектр услуг</h6>
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+                </div>
+                <div class="advantages-block">
+                    <div class="advantages-block_img">
+                        <img src="@/assets/images/chevrone.png" alt="">
+                        <span>2</span>
+                    </div>
+                    <h6>Персональный подход</h6>
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+                </div>
+                <div class="advantages-block">
+                    <div class="advantages-block_img">
+                        <img src="@/assets/images/chevrone.png" alt="">
+                        <span>3</span>
+                    </div>
+                    <h6>Опытные консультанты</h6>
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+                </div>
+                <div class="advantages-block">
+                    <div class="advantages-block_img">
+                        <img src="@/assets/images/chevrone.png" alt="">
+                        <span>4</span>
+                    </div>
+                    <h6>Работа с задачами любой сложности</h6>
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+                </div>
+                <div class="advantages-block">
+                    <div class="advantages-block_img">
+                        <img src="@/assets/images/chevrone.png" alt="">
+                        <span>5</span>
+                    </div>
+                    <h6>Полная прозрачность и легитимность</h6>
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+                </div>
+                <div class="advantages-block">
+                    <div class="advantages-block_img">
+                        <img src="@/assets/images/chevrone.png" alt="">
+                        <span>6</span>
+                    </div>
+                    <h6>Дифференцированные тарифы</h6>
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+                </div>
+            </div>
+        </section>
+        <div class="line"></div>
+        <section class="partners-back">
+            <div class="partners my-container">
+                <h6 class="title"><span>Нам</span> доверяют</h6>
+                <logo-slider></logo-slider>
+                <div class="partners-line"></div>
+                <reviews-partners></reviews-partners>
+            </div>
+        </section>
     </div>
 </template>
 
@@ -178,6 +240,8 @@ import mainButton from '@/components/UI/mainButton.vue'
 import packageCard from '@/components/packageCard.vue'
 import servicesCard from '@/components/servicesCard.vue'
 import casesSlider from '@/components/casesSlider.vue'
+import logoSlider from '@/components/logoSlider'
+import reviewsPartners from '@/components/reviewsPartners'
 
 export default {
     components: {
@@ -185,6 +249,8 @@ export default {
         packageCard,
         servicesCard,
         casesSlider,
+        logoSlider,
+        reviewsPartners
     },
     data() {
         return{
@@ -524,6 +590,47 @@ export default {
     }
     .projects-cards{
         margin-bottom: 110px;
+        row-gap: 40px;
+    }
+    /* advantages */
+    .advantages{
+        margin-top: 130px;
+    }
+    .advantages-block{
+        width: 31%;
+    }
+    .advantages-block_img{
+        display: flex;
+        align-items: center;
+    }
+    .advantages-block_img span{
+        font-size: 60px;
+        line-height: 84px;
+        color: var(--btnRed2);
+        font-weight: 900;
+        margin-left: 20px;
+    }
+    .advantages-block h6{
+        font-size: 30px;
+        line-height: 42px;
+        margin: 15px 0;
+    }
+    .advantages-block p{
+        font-size: 22px;
+        line-height: 31px;
+        color: var(--textBlue1);
+    }
+    /* partners */
+    .partners-back{
+        background: var(--gradVertical);
+        padding-bottom: 130px;
+    }
+    .partners-line{
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(270deg, rgba(28, 112, 149, 0) 17.01%, #1C7095 100%);
+        margin: 50px 0;
     }
 
     /* media */
@@ -549,6 +656,22 @@ export default {
         }
     }
     @media (max-width:1200px){
+        .advantages-block_img span{
+            font-size: 50px;
+            line-height: 70px;
+        }
+        .advantages-block h6{
+            font-size: 28px;
+            line-height: 39px;
+            word-break: break-all;
+        }
+        .advantages-block p{
+            font-size: 20px;
+            line-height: 28px;
+        }
+        .project-card{
+            width: 48%;
+        }
         .request-task_img{
         height: 470px;
         }
@@ -621,8 +744,43 @@ export default {
         .request-form_inpt input, .request-form_inpt textarea{
             padding: 15px 20px 18px 20px;
         }
+        .package-card h6{
+            font-size: 40px;
+            line-height: 56px;
+        }
+        .package-card p, .package-card_list li, .package-card a, .package-card button{
+            font-size: 20px;
+            line-height: 28px;
+        }
+        .package-card p span, .package-card_form p{
+            font-size: 28px;
+            line-height: 39px;
+        }
+        .package-card_line{
+            margin: 25px 0;
+        }
+        .individual-card_footer p,.individual-card_inpts p{
+            font-size: 16px;
+            line-height: 22px;
+        }
+        .package-card{
+            width: 48%;
+        }
+        .packegaes-cards{
+            row-gap: 40px;
+        }
     }
     @media (max-width:992px){
+        .advantages-block{
+            width: 48%;
+        }
+        .advantages{
+            margin-top: 90px;
+        }
+        .projects p{
+            font-size: 20px;
+            line-height: 28px;
+        }
         .header{
             height: 741px;
         }
@@ -643,8 +801,23 @@ export default {
         .request-task_img{
             width: 48%;
         }
+        .package-card{
+            width: 100%;
+        }
+        .individual-card_inpts{
+            row-gap: 20px;
+        }
+        .individual-card_inpts .request-form_inpt{
+            width: 48%;
+        }
+        .individual-card_inpts .request-form_inpt:last-of-type{
+            width: 100%;
+        }
     }
     @media (max-width:768px){
+        .project-card{
+            width: 100%;
+        }
         .my-container{
             padding: 0 20px;
         }
@@ -685,8 +858,21 @@ export default {
         .request-task_img img{
             width: 100%;
         }
+        .advantages-block{
+            width: 100%;
+        }
     }
     @media (max-width:576px){
+        .projects-cards{
+            margin-bottom: 50px;
+        }
+        .project-card{
+            padding: 20px;
+        }
+        .projects p{
+            font-size: 18px;
+            line-height: 25px;
+        }
         .header{
             height: 878px;
         }
@@ -735,9 +921,7 @@ export default {
         .synopsis{
             margin-top: 50px;
         }
-        .line{
-            margin: 60px 0 40px 0;
-        }
+        
         .request-task h6{
             font-size: 30px;
             line-height: 40px;
@@ -764,6 +948,57 @@ export default {
             line-height: 25px;
             padding: 16px 0;
             margin-bottom: 30px;
+        }
+        .package-card h6{
+            font-size: 30px;
+            line-height: 40px;
+        }
+        .package-card{
+            padding: 15px 20px 20px;
+        }
+        .package-card p, .package-card_list li, .package-card a, .package-card button{
+            font-size: 18px;
+            line-height: 25px;
+        }
+        .package-card_line{
+            margin: 20px 0;
+        }
+        .package-card p span, .package-card_form p{
+            font-size: 22px;
+            line-height: 31px;
+        }
+        .individual-card_inpts .request-form_inpt{
+            width: 100%;
+        }
+        .individual-card_footer p, .individual-card_inpts p{
+            font-size: 16px;
+            line-height: 22px;
+        }
+        .package-card button{
+            width: 100%;
+        }
+        .advantages{
+            margin-top: 50px;
+        }
+        .advantages-block_img img{
+            max-width: 43px;
+        }
+        .advantages-block_img span{
+            font-size: 38px;
+            line-height: 47px;
+            margin-left: 10px;
+        }
+        .advantages-block h6{
+            font-size: 22px;
+            line-height: 31px;
+            margin: 10px 0;
+        }
+        .advantages-block p{
+            font-size: 18px;
+            line-height: 25px;
+        }
+        .projects-back{
+            padding-bottom: 50px;
         }
     }
 </style>

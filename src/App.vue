@@ -6,7 +6,7 @@
 </template>
 <script>
 import navbar from '@/components/navbar'
-import footer from '@/components/UI/footer'
+import footer from '@/components/footer'
 export default {
   components: { navbar, footer},
 }
@@ -95,5 +95,22 @@ export default {
     .title span{
         font-weight: 600;
         color: var(--btnRed2);
+    }
+    @media (max-width:1200px){
+       .title{
+        font-size: 50px;
+        line-height: 60px;
+        margin-bottom: 40px;
+       }
+    }
+    @media (max-width:576px){
+       .title{
+        font-size: 38px;
+        line-height: 47px;
+        margin-bottom: 30px;
+       }
+       .line{
+            margin: 50px 0;
+        }
     }
 </style>
