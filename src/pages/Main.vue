@@ -83,7 +83,7 @@
                          </div>
                          <div class="request-form_inpt">
                              <p>Телефон*</p>
-                             <input type="text" name="requestFormPhone" required>
+                             <input type="number" name="requestFormPhone" required>
                          </div>
                          <div class="request-form_inpt">
                              <p>Ваш проект*</p>
@@ -119,7 +119,7 @@
                          </div>
                          <div class="request-form_inpt">
                              <p>Телефон*</p>
-                             <input type="text" name="individualFormPhone" required>
+                             <input type="number" name="individualFormPhone" required>
                          </div>
                          <div class="request-form_inpt">
                              <p>Ваш проект*</p>
@@ -232,6 +232,15 @@
                 <reviews-partners></reviews-partners>
             </div>
         </section>
+        <section class="faq my-container">
+            <h6 class="title"><span>FA</span>Q</h6>
+            <accordion title="Ваши расценки ниже, чем у конкурентов?" content="Учитывая тот факт, что основная часть наших заказчиков представляют страны СНГ и ближнего зарубежья, приоритетные направления — это Google и Яндекс. Тем не менее, по желанию клиента мы можем использовать и другие поисковики с настройками геотаргетинга."></accordion>
+            <accordion title="Где можно узнать точные цены?" content="Учитывая тот факт, что основная часть наших заказчиков представляют страны СНГ и ближнего зарубежья, приоритетные направления — это Google и Яндекс. Тем не менее, по желанию клиента мы можем использовать и другие поисковики с настройками геотаргетинга."></accordion>
+            <accordion title="С какими поисковыми системами вы работаете для рекламы и продвижения?" content="Учитывая тот факт, что основная часть наших заказчиков представляют страны СНГ и ближнего зарубежья, приоритетные направления — это Google и Яндекс. Тем не менее, по желанию клиента мы можем использовать и другие поисковики с настройками геотаргетинга."></accordion>
+            <accordion title="Даете ли вы какие-то гарантии?" content="Учитывая тот факт, что основная часть наших заказчиков представляют страны СНГ и ближнего зарубежья, приоритетные направления — это Google и Яндекс. Тем не менее, по желанию клиента мы можем использовать и другие поисковики с настройками геотаргетинга."></accordion>
+            <accordion title="Что представляют собой ваши порталы?" content="Учитывая тот факт, что основная часть наших заказчиков представляют страны СНГ и ближнего зарубежья, приоритетные направления — это Google и Яндекс. Тем не менее, по желанию клиента мы можем использовать и другие поисковики с настройками геотаргетинга."></accordion>
+        </section>
+        <div class="line"></div>
     </div>
 </template>
 
@@ -242,6 +251,7 @@ import servicesCard from '@/components/servicesCard.vue'
 import casesSlider from '@/components/casesSlider.vue'
 import logoSlider from '@/components/logoSlider'
 import reviewsPartners from '@/components/reviewsPartners'
+import accordion from '@/components/accordion'
 
 export default {
     components: {
@@ -250,7 +260,8 @@ export default {
         servicesCard,
         casesSlider,
         logoSlider,
-        reviewsPartners
+        reviewsPartners,
+        accordion
     },
     data() {
         return{
@@ -631,6 +642,10 @@ export default {
         height: 2px;
         background: linear-gradient(270deg, rgba(28, 112, 149, 0) 17.01%, #1C7095 100%);
         margin: 50px 0;
+    }
+    /* faq */
+    .faq{
+        margin-top: 110px;
     }
 
     /* media */

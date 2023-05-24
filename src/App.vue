@@ -2,13 +2,16 @@
     <div class="app">
         <navbar></navbar>
         <router-view></router-view>
+        <footerr></footerr>
+        <scroll-to-top-button></scroll-to-top-button>
     </div>
 </template>
 <script>
 import navbar from '@/components/navbar'
-import footer from '@/components/footer'
+import footerr from '@/components/footer'
+import ScrollToTopButton from '@/components/UI/ScrollToTopButton'
 export default {
-  components: { navbar, footer},
+  components: { navbar, footerr, ScrollToTopButton},
 }
 </script>
 <style>
@@ -73,7 +76,6 @@ export default {
         width: 100%;
         padding: 0 40px;
         margin: 0 auto;
-        /* border: 1px solid red; */
     }
     .app{
         background: var(--backBlack1);
@@ -95,6 +97,10 @@ export default {
     .title span{
         font-weight: 600;
         color: var(--btnRed2);
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
     }
     @media (max-width:1200px){
        .title{

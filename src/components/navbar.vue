@@ -152,7 +152,7 @@ export default {
     width: 100%;
     background: var(--backBlack1);
     position: sticky;
-    top: 0;
+    top: -1px;
     z-index: 1100;
   }
   .navbar{
