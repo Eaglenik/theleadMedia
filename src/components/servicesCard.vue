@@ -9,13 +9,22 @@
       <p class="services-description">{{ description }}</p>
       <div class="services-card_links d-flex align-items-center justify-content-between w-100">
         <router-link :to="link">Узнать больше <img src="@/assets/images/services-card/services-chevrone.svg" alt=""></router-link>
-        <button>Оставить заявку</button>
+        <button @click="openModal">Оставить заявку</button>
       </div>
     </div>
   </template>
 <script>
+import { BModal } from 'bootstrap-vue-3';
 export default {
   name: 'ServicesCard',
+  components: {
+    BModal,
+  },
+  data() {
+    return {
+        showModal: false
+    }
+  },
   props: {
     title: String,
     price: String,
@@ -30,6 +39,11 @@ export default {
     },
     link() {
       return `/services/${this.slug}`;
+    }
+  },
+  methods: {
+    openModal() {
+      this.$emit('open-modal');
     }
   }
 }

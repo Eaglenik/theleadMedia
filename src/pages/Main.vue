@@ -54,7 +54,46 @@
                 :price="card.price"
                 :image="card.image"
                 :description="card.description"
-                :slug="card.slug"/>
+                :slug="card.slug"
+                @open-modal="showModal = true"/>
+                <b-modal ref="modal"  v-model="showModal" id="modal-center" centered> 
+                    <h6>Оставьте заявку и наш менеджер свяжется с вами в ближайшее время</h6>
+                    <form action="URL" class="requestServiceForm" name="requestServiceForm">
+                        <div class="requestServiceForm-inpts d-flex flex-wrap justify-content-between">
+                            <div class="requestServiceForm-input">
+                                <p>Имя*</p>
+                                <input type="text" required> 
+                            </div>
+                            <div class="requestServiceForm-input">
+                                <p>Телефон*</p>
+                                <input type="number" required>
+                            </div>
+                            <div class="requestServiceForm-input">
+                                <p>Электронная почта</p>
+                                <input type="text">
+                            </div>
+                            <div class="requestServiceForm-input">
+                                <p>Ваш проект*</p>
+                                <input type="text" required>
+                            </div>
+                            <div class="requestServiceForm-input">
+                                <p>Вид услуги*</p>
+                                <input type="text" required>
+                            </div>
+                            <div class="requestServiceForm-input">
+                                <p>Комментарий к заявке*</p>
+                                <textarea v-model="review" name="requestServiceFormYoursQuestion" maxlength="500" required v-on:input="autoExpand"></textarea>
+                            </div>
+                        </div>
+                        <div class="footer-question_footer d-flex justify-content-between align-items-lg-center align-items-start flex-lg-row flex-column gap-lg-0 gap-4 mt-5">
+                        <p>Нажимая на кнопку «Отправить», вы даете согласие на обработку персональных данных</p>
+                        <div class="footer-question_btn d-flex align-items-center gap-5 flex-sm-row flex-column">
+                            капча
+                            <main-button>Отправить</main-button>
+                        </div>
+                    </div>
+                </form>
+                </b-modal>
         </section>
         <div class="line"></div> 
         <section class="request-back">
@@ -105,9 +144,9 @@
         <section class="packages my-container">
              <h5 class="title"><span>Комплексные</span> пакеты</h5>
              <div class="packegaes-cards d-flex justify-content-between flex-wrap">
-                 <package-card title="Business" price="30 000 000 сум" :items="['Создание лендинг-страницы', 'Duis aute irure dolor in reprehenderit', 'Voluptate velit esse cillum', 'Dolore eu fugiat nulla pariatur', 'Excepteur sint occaecat cupidatat', 'Nisi ut aliquip ex ea commodo consequat']"></package-card>
-                 <package-card title="Optimal" price="50 000 000 сум" :items="['Создание web-сайта с уникальным дизайном', 'Lorem ipsum dolor sit amet', 'Consectetur adipiscing elit', 'Sed do eiusmod tempor incididunt', 'Ut labore et dolore magna aliqua', 'Ut enim ad minim veniam']"></package-card>
-                 <package-card title="Premium" price="100 000 000 сум" :items="['Создание web-сайта на шаблоне', 'Sed ut perspiciatis unde', 'But who has any right', 'Nor again is there anyone', 'But who has any right', 'Sed ut perspiciatis unde']"></package-card>
+                 <package-card ref="card" title="Business" price="30 000 000 сум" :items="['Создание лендинг-страницы', 'Duis aute irure dolor in reprehenderit', 'Voluptate velit esse cillum', 'Dolore eu fugiat nulla pariatur', 'Excepteur sint occaecat cupidatat', 'Nisi ut aliquip ex ea commodo consequat']"></package-card>
+                 <package-card ref="card" title="Optimal" price="50 000 000 сум" :items="['Создание web-сайта с уникальным дизайном', 'Lorem ipsum dolor sit amet', 'Consectetur adipiscing elit', 'Sed do eiusmod tempor incididunt', 'Ut labore et dolore magna aliqua', 'Ut enim ad minim veniam']"></package-card>
+                 <package-card ref="card" title="Premium" price="100 000 000 сум" :items="['Создание web-сайта на шаблоне', 'Sed ut perspiciatis unde', 'But who has any right', 'Nor again is there anyone', 'But who has any right', 'Sed ut perspiciatis unde']"></package-card>
                  </div>
                  <form action="URL" class="package-card package-card_form w-100">
                      <h6>Индивидуальный пакет</h6>
@@ -252,6 +291,7 @@ import casesSlider from '@/components/casesSlider.vue'
 import logoSlider from '@/components/logoSlider'
 import reviewsPartners from '@/components/reviewsPartners'
 import accordion from '@/components/accordion'
+import { BModal } from 'bootstrap-vue-3'
 
 export default {
     components: {
@@ -261,11 +301,13 @@ export default {
         casesSlider,
         logoSlider,
         reviewsPartners,
-        accordion
+        accordion,
+        BModal
     },
     data() {
         return{
             review: '',
+            showModal: false,
             cards: [
         {
           title: '<span>Создание</span> WEB-сайтов', 
@@ -318,6 +360,9 @@ export default {
       element.style.height = '75px';
       element.style.height = `${element.scrollHeight}px`;
     },
+    openModal() {
+        this.$refs.modal.show();
+      }
   },
 }
 </script>
@@ -647,7 +692,72 @@ export default {
     .faq{
         margin-top: 110px;
     }
-
+    /* modal serviceRequestForm */
+    .modal-header,
+    .modal-footer{
+        display: none;
+    }
+    .modal-content{
+        background: var(--gradRadial1);
+        border: 3px solid transparent;
+        border-image:  linear-gradient(22.06deg, #1C7095 0%, #0E1531 100%);
+        border-image-slice: 1;
+        color: white;
+    }
+    .modal-body{
+        padding: 40px 50px 50px;
+    }
+    .modal-dialog{
+        max-width: 1100px;
+        padding: 0 40px;
+        width: 100%;
+    }
+    #modal-center h6{
+        font-size: 30px;
+        line-height: 42px;
+        font-weight: 500;
+        margin-bottom: 30px;
+    }
+    .requestServiceForm-input p{
+        font-size: 18px;
+        line-height: 25px;
+        color: var(--textBlue1);
+        margin-left: 20px;
+        margin-bottom: 5px;
+    }
+    .requestServiceForm-input{
+        width: 48%;
+    }
+    .requestServiceForm-input input,
+    .requestServiceForm-input textarea{
+        width: 100%;
+        padding: 16px 25px;
+        border: 2px solid var(--textBlue2);
+        background: none;
+        outline: none;
+        border-radius: 0;
+        font-size: 20px;
+        line-height: 28px;
+        color: white;
+        resize: none;
+    }
+    .requestServiceForm-input textarea,
+    .requestServiceForm-input:nth-of-type(5) input{
+        height: 72px;
+        overflow: hidden;
+    }
+    .footer-question_footer p{
+        font-size: 18px;
+        line-height: 25px;
+        color: var(--textBlue1);
+        max-width: 420px;
+    }
+    .requestServiceForm-inpts{
+        row-gap: 30px;
+    }
+    
+    
+    
     /* media */
     @media (max-width:1400px){
         .header{
@@ -786,6 +896,25 @@ export default {
         }
     }
     @media (max-width:992px){
+        .modal-header{
+            display: flex;
+            border-bottom: none;
+            padding: 40px;
+        }
+        .btn-close{
+            background: url(@/assets/images/icons/btn-close.png) center/1em auto no-repeat;
+            width: 19px;
+            height: 15px;
+            opacity: 1;
+            font-size: 25px;
+        }
+        #modal-center h6{
+            font-size: 28px;
+            line-height: 39px;
+        }
+        .requestServiceForm-input input, .requestServiceForm-input textarea{
+            padding: 16px 20px;
+        }
         .advantages-block{
             width: 48%;
         }
@@ -830,6 +959,16 @@ export default {
         }
     }
     @media (max-width:768px){
+        .modal-body{
+            padding: 20px;
+        }
+        .modal-dialog{
+            margin: 0;
+            padding: 0;
+        }
+        .requestServiceForm-input{
+            width: 100%;
+        }
         .project-card{
             width: 100%;
         }
@@ -876,8 +1015,24 @@ export default {
         .advantages-block{
             width: 100%;
         }
+        .modal-header{
+            padding: 20px;
+        }
     }
     @media (max-width:576px){
+        #modal-center h6{
+            font-size: 22px;
+            line-height: 31px;
+            text-align: center;
+        }
+        .requestServiceForm-input p,
+        .footer-question_footer p{
+            font-size: 16px;
+            line-height: 22px;
+        }
+        .requestServiceForm-input input, .requestServiceForm-input textarea{
+            padding: 15px;
+        }
         .projects-cards{
             margin-bottom: 50px;
         }

@@ -7,7 +7,6 @@ import router from '@/router/router'
 
 const app = createApp(App)
 
-
 app
     .use(router)
     .use(BootstrapVue3)

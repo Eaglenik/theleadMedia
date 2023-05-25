@@ -1,5 +1,6 @@
 <template>
     <div class="app">
+        <service-request-form></service-request-form>
         <navbar></navbar>
         <router-view></router-view>
         <footerr></footerr>

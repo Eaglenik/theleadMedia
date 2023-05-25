@@ -7,21 +7,24 @@
         <li v-for="(item, index) in items" :key="index" :class="{ packageCardHidden: index > 3 && !showAll }">{{ item }}</li>
       </ul>
       <a href="#" @click.prevent="toggleShowAll">{{ showAll ? 'Скрыть' : 'Развернуть' }} <img :class="{ packageCardChevrone: showAll }" src="../assets/images/icons/chevroneDown.svg" alt=""></a>
-      <button>Оставить заявку</button>
+      <button @click="showModal = true">Открыть заявку</button>
     </div>
   </template>
   
   <script>
+  import { BModal } from 'bootstrap-vue-3'
   export default {
     name: 'PackageCard',
     props: {
       title: String,
       price: String,
-      items: Array
+      items: Array,
+      BModal
     },
     data() {
       return {
-        showAll: false
+        showAll: false,
+        showModal: false,
       }
     },
     methods: {
@@ -31,7 +34,6 @@
     }
   }
   </script>
-  
   <style>
   .packageCardHidden {
     display: none;
