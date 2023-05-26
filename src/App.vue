@@ -1,6 +1,5 @@
 <template>
     <div class="app">
-        <service-request-form></service-request-form>
         <navbar></navbar>
         <router-view></router-view>
         <footerr></footerr>
@@ -99,9 +98,31 @@ export default {
         font-weight: 600;
         color: var(--btnRed2);
     }
+    
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button {
         -webkit-appearance: none;
+    }
+    /* breadcrumbs */
+    .breadcrumb-icon{
+      display: inherit;
+      margin: 0 15px;
+    }
+    .breadcrumbs{
+      margin-top: 40px;
+      margin-bottom: 70px;
+    }
+    .breadcrumb-link a{
+      color: var(--backBlack3) !important;
+      font-weight: 700 !important;
+      font-size: 18px;
+      line-height: 25px;
+    }
+    .breadcrumb-item.active span{
+      color: var(--backBlack3) !important;
+      font-weight: 500 !important;
+      font-size: 18px;
+      line-height: 25px;
     }
     @media (max-width:1200px){
        .title{
