@@ -8,14 +8,14 @@
           </div>
       </div>
       <div class="chevrone-horizontal">
-                     <img class="chevrW" src="@/assets/images/header/chevroneWhite.svg" alt="">
-                     <img class="chevrR" src="@/assets/images/header/chevroneRed.svg" alt="">
-                     <img class="chevrW" src="@/assets/images/header/chevroneWhite.svg" alt="">
-                     <img class="chevrR" src="@/assets/images/header/chevroneRed.svg" alt="">
-                     <img class="chevrW" src="@/assets/images/header/chevroneWhite.svg" alt="">
-                     <img class="chevrR" src="@/assets/images/header/chevroneRed.svg" alt="">
-                     <img class="chevrW" src="@/assets/images/header/chevroneWhite.svg" alt="">
-                     <img class="chevrR" src="@/assets/images/header/chevroneRed.svg" alt="">
+        <img class="chevrW" src="@/assets/images/header/chevroneWhite.svg" alt="">
+        <img class="chevrR" src="@/assets/images/header/chevroneRed.svg" alt="">
+        <img class="chevrW" src="@/assets/images/header/chevroneWhite.svg" alt="">
+        <img class="chevrR" src="@/assets/images/header/chevroneRed.svg" alt="">
+        <img class="chevrW" src="@/assets/images/header/chevroneWhite.svg" alt="">
+        <img class="chevrR" src="@/assets/images/header/chevroneRed.svg" alt="">
+        <img class="chevrW" src="@/assets/images/header/chevroneWhite.svg" alt="">
+        <img class="chevrR" src="@/assets/images/header/chevroneRed.svg" alt="">
       </div>
       <img class="mainHeader" :src="require(`@/assets/images/services/${currentService.mainHeaderImage}`)" alt="">
       <img :src="require(`@/assets/images/services/${currentService.mainHeaderBackImage}`)" alt="" class="mainHeaderBack">
@@ -32,83 +32,63 @@
     </section>
     <section class="service-main my-container">
       <div class="service-navigation">
-
         <accordion>
-        <accordion-item>
-          <template v-slot:accordion-trigger>
+          <accordion-item ref="serviceAccordion1" class="mb-4">
+            <template v-slot:accordion-trigger>
             Услуги
-          </template>
-          <template v-slot:accordion-content>
-              <accordion-item class="subAccordion">
-                <template v-slot:accordion-trigger>
-                  Создание WEB-сайтов
-                </template>
-                <template v-slot:accordion-content>
-                  Lorem ipsum dolor sit amet,
-                </template>
-            </accordion-item>
-              <accordion-item class="subAccordion">
-                <template v-slot:accordion-trigger>
-                  SEO-продвижение
-                </template>
-                <template v-slot:accordion-content>
-                  Lorem ipsum dolor sit amet,
-                </template>
-            </accordion-item>
-              <accordion-item class="subAccordion">
-                <template v-slot:accordion-trigger>
-                  Контекстная реклама в Google и Яндекс
-                </template>
-                <template v-slot:accordion-content>
-                  Lorem ipsum dolor sit amet,
-                </template>
-            </accordion-item>
-              <accordion-item class="subAccordion">
-                <template v-slot:accordion-trigger>
-                  Продвижение на GoogleMaps
-                </template>
-                <template v-slot:accordion-content>
-                  Lorem ipsum dolor sit amet,
-                </template>
-            </accordion-item>
-              <accordion-item class="subAccordion">
-                <template v-slot:accordion-trigger>
-                  Продвижение на Яндекс.Карты
-                </template>
-                <template v-slot:accordion-content>
-                  Lorem ipsum dolor sit amet,
-                </template>
-            </accordion-item>
-              <accordion-item class="subAccordion">
-                <template v-slot:accordion-trigger>
-                  Услуги копирайтинга
-                </template>
-                <template v-slot:accordion-content>
-                  Lorem ipsum dolor sit amet,
-                </template>
-            </accordion-item>
-          </template>
-        </accordion-item>
-        <accordion-item>
+            </template>
+            <template v-slot:accordion-content>
+              <div v-for="service in services" class="subAccordion">
+                 <accordion-item :key="service.slug" v-if="service.slug === currentSlug" :class="{ 'accordion-active': isOpen }" ref="innerAccordion" class="subAccordionTitle">
+                  <template v-slot:accordion-trigger>
+                    {{ service.title }}
+                  </template>
+                  <template v-slot:accordion-content>
+                    <ul class="subAccordion-content-list">
+                      <li v-for="category in service.categories" :key="category.id">
+                        <a href="#!">{{ category.title }}</a>
+                      </li>
+                    </ul>
+                  </template>
+                 </accordion-item>
+                 <div v-else :key="service.slug"  @click="$router.push({ name: 'Service', params: { slug: service.slug } })">
+                  <a class="subAccordion-header-title">
+                    {{ service.title }}
+                  </a>
+                 </div>
+               </div>
+            </template>
+          </accordion-item>
+          <accordion-item ref="serviceAccordion2" class="mb-4">
           <template v-slot:accordion-trigger>
             Все кейсы
           </template>
           <template v-slot:accordion-content>
-            Lorem ipsum dolor sit
+            <router-link class="subAccordion" to="/TerraPro" >TerraPro</router-link>
+            <router-link class="subAccordion" to="/Arton" >Arton</router-link>
+            <router-link class="subAccordion" to="/Avatrade" >Avatrade</router-link>
+            <router-link class="subAccordion" to="/Aksa" >Aksa</router-link>
+            <router-link class="subAccordion" to="/Ziynatdesign" >Ziynatdesign</router-link>
+            <router-link class="subAccordion" to="/АКТИОН МЦФЭР" >АКТИОН МЦФЭР</router-link>
           </template>
-        </accordion-item>
-        <accordion-item>
+          </accordion-item>
+          <accordion-item ref="serviceAccordion3" class="mb-4">
           <template v-slot:accordion-trigger>
             Наши проекты
           </template>
           <template v-slot:accordion-content>
-            Lorem ipsum dolor sit
+            <router-link class="subAccordion" to="/projects/pc.uz" >PC.uz</router-link>
+            <router-link class="subAccordion" to="/projects/stroyvitrina.uz" >StroyVitrina.uz</router-link>
+            <router-link class="subAccordion" to="/projects/mebelvitrina.uz" >MebelVitrina.uz</router-link>
+            <router-link class="subAccordion" to="/projects/sprav.uz" >Sprav.uz</router-link>
           </template>
-        </accordion-item>
-      </accordion>
+          </accordion-item>
+        </accordion>
       </div>
       <div class="service-content">
-
+        <div class="service-description" >
+          <p v-html="currentService.serviceDescription"></p>
+        </div>
       </div>
     </section>
   </template>
@@ -122,7 +102,7 @@
       mainButton,
       BBreadcrumb,
       accordion,
-      accordionItem
+      accordionItem  
     },
     data() {
       return {
@@ -133,7 +113,22 @@
             content: 'Услуги профессиональной разработки сайтов в Ташкенте',
             btnText: 'Заказать создание сайта',
             mainHeaderImage: 'web.png',
-            mainHeaderBackImage: 'webBack.png' 
+            mainHeaderBackImage: 'webBack.png',
+            categories: [
+              {
+                id: 1,
+                title: 'Рубрика 1.1'
+              },
+              {
+                id: 2,
+                title: 'Рубрика 1.2'
+              },
+              {
+                id: 3,
+                title: 'Рубрика 1.3'
+              }
+            ],
+            serviceDescription: 'ООО «TheLead Media» предлагает профессиональные услуги контекстной рекламы в Узбекистане. Работы проводятся квалифицированными специалистами.<br><br>В компании применяется дифференцированный подход к обслуживанию. Мы подбираем оптимальные тарифные пакеты в зависимости от требований и возможностей каждого клиента.'
           },
           {
             slug: 'seo',
@@ -141,7 +136,21 @@
             content: 'Комплекс услуг, направленный на повышение эффективности сайтов',
             btnText: 'Заказать SEO-продвижение',
             mainHeaderImage: 'seo.png' ,
-            mainHeaderBackImage: 'seo-back.png' 
+            mainHeaderBackImage: 'seo-back.png',
+            categories: [
+              {
+                id: 1,
+                title: 'Рубрика 1.1'
+              },
+              {
+                id: 2,
+                title: 'Рубрика 1.2'
+              },
+              {
+                id: 3,
+                title: 'Рубрика 1.3'
+              }
+            ]
           },
           {
             slug: 'google-yandex-ads',
@@ -150,6 +159,40 @@
             btnText: 'Заказать настройку рекламы',
             mainHeaderImage: 'adsGoogleYandex.png',
             mainHeaderBackImage: 'adsGoogleYandexBack.png',
+            categories: [
+              {
+                id: 1,
+                title: 'Услуги контекстной рекламы'
+              },
+              {
+                id: 2,
+                title: 'Тарифные планы'
+              },
+              {
+                id: 3,
+                title: 'Как контекстная реклама поможет вашему проекту?'
+              },
+              {
+                id: 3,
+                title: 'Этапы настройки и ведения контекстной рекламы'
+              },
+              {
+                id: 1,
+                title: 'Результаты поддержки контекстной рекламы '
+              },
+              {
+                id: 2,
+                title: 'Реализованные кейсы'
+              },
+              {
+                id: 3,
+                title: 'Почему нам доверяют настройку рекламы?'
+              },
+              {
+                id: 3,
+                title: 'Задать вопрос'
+              }
+            ]
           },
           {
             slug: 'google-maps',
@@ -158,6 +201,20 @@
             btnText: 'Заказать продвижение на GoogleMaps',
             mainHeaderImage: 'googleMaps.png' ,
             mainHeaderBackImage: 'googleMapsBack.png',
+            categories: [
+              {
+                id: 1,
+                title: 'Рубрика 1.1'
+              },
+              {
+                id: 2,
+                title: 'Рубрика 1.2'
+              },
+              {
+                id: 3,
+                title: 'Рубрика 1.3'
+              }
+            ]
           },
           {
             slug: 'yandex-maps',
@@ -166,6 +223,20 @@
             btnText: 'Заказать продвижение на Яндекс.Карты',
             mainHeaderImage: 'yandexMaps.png',
             mainHeaderBackImage: 'yandexMapsBack.png',
+            categories: [
+              {
+                id: 1,
+                title: 'Рубрика 1.1'
+              },
+              {
+                id: 2,
+                title: 'Рубрика 1.2'
+              },
+              {
+                id: 3,
+                title: 'Рубрика 1.3'
+              }
+            ]
           },
           {
             slug: 'copywriting',
@@ -174,10 +245,24 @@
             btnText: 'Заказать услуги копирайтинга',
             mainHeaderImage: 'copi.png',
             mainHeaderBackImage: 'copiBack.png',
+            categories: [
+              {
+                id: 1,
+                title: 'Рубрика 1.1'
+              },
+              {
+                id: 2,
+                title: 'Рубрика 1.2'
+              },
+              {
+                id: 3,
+                title: 'Рубрика 1.3'
+              }
+            ]
           },
         ],
         currentService: null,
-        currentSlug: null
+        currentSlug: null,
       }
     },
     created() {
@@ -194,6 +279,20 @@
         )
       },
     },
+    computed: {
+      currentService() {
+        return this.services.find(service => service.slug === this.currentSlug);
+      },
+      isCurrentServicePage() {
+        return !!this.currentService;
+      }
+    },
+    mounted() {
+      this.$refs.serviceAccordion1.isOpen = true;
+      this.$refs.serviceAccordion2.isOpen = false;
+      this.$refs.serviceAccordion3.isOpen = false;
+      this.$refs.innerAccordion.isOpen = true;
+    }
   }
   </script>
   <style scoped>
@@ -216,7 +315,50 @@
   }
   /* accordion */
   .service-navigation{
-    max-width: 330px;
+    max-width: 310px;
+    padding-right: 50px;
+    border-right: 2px solid transparent;
+    border-image:  linear-gradient(180deg, #0E1531 0%, #1F355E 4.27%, #1F355E 41.86%, #1F355E 95.18%, #0E1531 100%);
+    border-image-slice: 1;
+  }
+  .subAccordion-header-title,
+  .accordion-content a{
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 600;
+    color: rgba(181, 232, 255, 0.7);
+    cursor: pointer;
+  }
+  .subAccordion{
+    padding: 10px 0;
+    gap: 10px;
+  }
+  .subAccordion-content-list{
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .subAccordion-content-list a{
+    cursor: pointer;
+    color: rgba(181, 232, 255, 0.7);
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 500;
+  }
+  .service-main{
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+  }
+  /* service content */
+  .service-description{
+    margin-bottom: 90px;
+  }
+  .service-description p{
+    font-size: 22px;
+    line-height: 31px;
+    color: var(--textBlue1);
   }
 
   @media (max-width:1400px){

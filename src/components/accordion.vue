@@ -3,7 +3,6 @@
     <slot></slot>
   </ul>
 </template>
-
 <script>
 export default {
   props: {},
@@ -17,7 +16,7 @@ export default {
   },
   provide() {
     return { Accordion: this.Accordion };
-  }
+  },
 };
 </script>
 
