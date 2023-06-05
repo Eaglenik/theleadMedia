@@ -53,6 +53,7 @@
     outline: none;
     background-color: var(--backBlack3);
     transition: opacity 0.3s ease-in-out;
+    z-index: 1;
   }
   
   .scroll-to-top-button.hide {

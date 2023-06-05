@@ -7,7 +7,7 @@
         <li v-for="(item, index) in items" :key="index" :class="{ packageCardHidden: index > 3 && !showAll }">{{ item }}</li>
       </ul>
       <a href="#" @click.prevent="toggleShowAll">{{ showAll ? 'Скрыть' : 'Развернуть' }} <img :class="{ packageCardChevrone: showAll }" src="../assets/images/icons/chevroneDown.svg" alt=""></a>
-      <button @click="showModal = true">Открыть заявку</button>
+      <button @click="openModal">Оставить заявку</button>
     </div>
   </template>
   
@@ -30,6 +30,9 @@
     methods: {
       toggleShowAll() {
         this.showAll = !this.showAll;
+      },
+      openModal() {
+        this.$emit('open-modal');
       }
     }
   }

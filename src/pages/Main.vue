@@ -1,4 +1,4 @@
-<template>
+ <template>
     <div>
         <section class="header">
                  <div class="header-back my-container">
@@ -78,7 +78,7 @@
                             </div>
                             <div class="requestServiceForm-input">
                                 <p>Вид услуги*</p>
-                                <input type="text" required>
+                                <v-select v-model="value" :options="options"/>
                             </div>
                             <div class="requestServiceForm-input">
                                 <p>Комментарий к заявке*</p>
@@ -86,12 +86,12 @@
                             </div>
                         </div>
                         <div class="footer-question_footer d-flex justify-content-between align-items-lg-center align-items-start flex-lg-row flex-column gap-lg-0 gap-4 mt-5">
-                        <p>Нажимая на кнопку «Отправить», вы даете согласие на обработку персональных данных</p>
-                        <div class="footer-question_btn d-flex align-items-center gap-5 flex-sm-row flex-column">
+                            <p>Нажимая на кнопку «Отправить», вы даете согласие на обработку персональных данных</p>
+                            <div class="footer-question_btn d-flex align-items-center gap-5 flex-sm-row flex-column">
                             капча
-                            <main-button>Отправить</main-button>
+                                <main-button style="padding: 20px 30px; font-size: 22px; line-height: 31px;">Отправить</main-button>
+                            </div>
                         </div>
-                    </div>
                 </form>
                 </b-modal>
         </section>
@@ -144,9 +144,9 @@
         <section class="packages my-container">
              <h5 class="title"><span>Комплексные</span> пакеты</h5>
              <div class="packegaes-cards d-flex justify-content-between flex-wrap">
-                 <package-card ref="card" title="Business" price="30 000 000 сум" :items="['Создание лендинг-страницы', 'Duis aute irure dolor in reprehenderit', 'Voluptate velit esse cillum', 'Dolore eu fugiat nulla pariatur', 'Excepteur sint occaecat cupidatat', 'Nisi ut aliquip ex ea commodo consequat']"></package-card>
-                 <package-card ref="card" title="Optimal" price="50 000 000 сум" :items="['Создание web-сайта с уникальным дизайном', 'Lorem ipsum dolor sit amet', 'Consectetur adipiscing elit', 'Sed do eiusmod tempor incididunt', 'Ut labore et dolore magna aliqua', 'Ut enim ad minim veniam']"></package-card>
-                 <package-card ref="card" title="Premium" price="100 000 000 сум" :items="['Создание web-сайта на шаблоне', 'Sed ut perspiciatis unde', 'But who has any right', 'Nor again is there anyone', 'But who has any right', 'Sed ut perspiciatis unde']"></package-card>
+                 <package-card @open-modal="showModal = true" ref="card" title="Business" price="30 000 000 сум" :items="['Создание лендинг-страницы', 'Duis aute irure dolor in reprehenderit', 'Voluptate velit esse cillum', 'Dolore eu fugiat nulla pariatur', 'Excepteur sint occaecat cupidatat', 'Nisi ut aliquip ex ea commodo consequat']"></package-card>
+                 <package-card @open-modal="showModal = true" ref="card" title="Optimal" price="50 000 000 сум" :items="['Создание web-сайта с уникальным дизайном', 'Lorem ipsum dolor sit amet', 'Consectetur adipiscing elit', 'Sed do eiusmod tempor incididunt', 'Ut labore et dolore magna aliqua', 'Ut enim ad minim veniam']"></package-card>
+                 <package-card @open-modal="showModal = true" ref="card" title="Premium" price="100 000 000 сум" :items="['Создание web-сайта на шаблоне', 'Sed ut perspiciatis unde', 'But who has any right', 'Nor again is there anyone', 'But who has any right', 'Sed ut perspiciatis unde']"></package-card>
                  </div>
                  <form action="URL" class="package-card package-card_form w-100">
                      <h6>Индивидуальный пакет</h6>
@@ -176,10 +176,10 @@
         </section>
         <div class="line"></div>
         <section class="projects-back">
-                 <div class="projects my-container">
-                     <h5 class="title"><span>Другие</span> проекты компании</h5>
-                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                     <div class="projects-cards d-flex justify-content-between flex-wrap">
+            <div class="projects my-container">
+                <h5 class="title"><span>Другие</span> проекты компании</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <div class="projects-cards d-flex justify-content-between flex-wrap">
                          <router-link to="/projects/pc.uz" class="project-card" style="background:radial-gradient(72.63% 76.45% at 78.31% 10.82%, #FFED00 0%, #FC9D03 100%);" >
                              <img src="@/assets/images/projects/projects1.png" alt="">
                              <p><span>PC.uz </span>— уникальный по структуре и максимально простой в обращении цифровой IT-рынок Узбекистана<br><br>
@@ -204,10 +204,10 @@
                              Ut enim ad minim veniam, quis nostrud exercitation ullamco tempor incididunt ut labore et dolore magna</p>
                              <img src="@/assets/images/services-card/services-chevrone.svg" alt="">
                          </router-link>
-                     </div>
-                     <h5 class="title"><span>Реализованные</span> кейсы</h5>
-                     <casesSlider></casesSlider>
-                 </div>
+                </div>
+                <h5 class="title"><span>Реализованные</span> кейсы</h5>
+                <casesSlider></casesSlider>
+            </div>
         </section>
         <section class="advantages my-container">
             <h6 class="title">Преимущества</h6>
@@ -282,7 +282,6 @@
         <div class="line"></div>
     </div>
 </template>
-
 <script>
 import mainButton from '@/components/UI/mainButton.vue'
 import packageCard from '@/components/packageCard.vue'
@@ -292,7 +291,7 @@ import logoSlider from '@/components/logoSlider'
 import reviewsPartners from '@/components/reviewsPartners'
 import accordionFaq from '@/components/accordionFaq'
 import { BModal } from 'bootstrap-vue-3'
-
+import vSelect from "vue-select";
 export default {
     components: {
         mainButton,
@@ -302,56 +301,68 @@ export default {
         logoSlider,
         reviewsPartners,
         accordionFaq,
-        BModal
+        BModal,
+        vSelect
     },
     data() {
         return{
             review: '',
             showModal: false,
+            open: false,
+            selectedOption: null,
             cards: [
-        {
-          title: '<span>Создание</span> WEB-сайтов', 
-          price: '10 000 000 сум/мес', 
-          description: 'Предлагаем услуги профессиональной разработки сайтов в Ташкенте. Над созданием интернет-магазинов, корпоративных проектов и других ресурсов работают квалифицированные специалисты с большим опытом.',
-          image: 'services-card_img7.png',
-          slug: 'web'
-        },
-        {
+                {
+                    title: '<span>Создание</span> WEB-сайтов', 
+                    price: '10 000 000 сум/мес', 
+                    description: 'Предлагаем услуги профессиональной разработки сайтов в Ташкенте. Над созданием интернет-магазинов, корпоративных проектов и других ресурсов работают квалифицированные специалисты с большим опытом.',
+                    image: 'services-card_img7.png',
+                    slug: 'web'
+                },
+                {
           title: 'SEO <span>-продвижение</span>', 
           price: '4 000 000 сум/мес', 
           description: 'Search Engine Optimization (поисковая оптимизация) представляет собой один из распространенных способов привлечения пользователей на сайты. Результат достигается за счет повышения позиций ресурса в выдаче поисковых систем.',
           image: 'services-card_img1.png',
           slug: 'seo'
-        },
-        {
+                },
+                {
           title: 'Контекстная реклама <span>в Google и Яндекс</span>', 
           price: '2 000 000 сум/мес', 
           description: 'Профессиональные услуги контекстной рекламы в Узбекистане. Работы проводят квалифицированные специалисты.',
           image: 'services-card_img2.png',
           slug: 'google-yandex-ads'
-        },
-        {
+                },
+                {
           title: '<span>Продвижение на</span> GoogleMaps', 
           price: '1 000 000 сум/мес', 
           description: 'Услуги по размещению на Гугл картах в Ташкенте и других городах Узбекистана. Работы проводят квалифицированные специалисты.',
           image: 'services-card_img3.png',
           slug: 'google-maps'
-        },
-        {
+                },
+                {
           title: '<span>Продвижение на</span> Яндекс.Карты', 
           price: '500 000 сум/мес', 
           description: 'Профессиональные услуги копирайтинга в Ташкенте и других городах Узбекистана. Работы по написанию, корректировке и редактированию текстов проводят квалифицированные специалисты с большим опытом.',
           image: 'services-card_img4.png',
           slug: 'yandex-maps'
-        },
-        {
+                },
+                {
           title: '<span>Услуги</span> копирайтинга', 
           price: '50 000 сум/ 1 000 знаков', 
           description: 'Предлагаем услуги профессиональной разработки сайтов в Ташкенте. Над созданием интернет-магазинов, корпоративных проектов и других ресурсов работают квалифицированные специалисты с большим опытом.',
           image: 'services-card_img5.png',
           slug: 'copywriting'
-        },
-      ],
+                },
+            ],
+            value: "",
+            options: [
+              { value: "Создание WEB-сайтов", label: "Создание WEB-сайтов" },
+              { value: "SEO-продвижение", label: "SEO-продвижение" },
+              { value: "Контекстная реклама в Google и Яндекс", label: "Контекстная реклама в Google и Яндекс" },
+              { value: "Продвижение на GoogleMaps", label: "Продвижение на GoogleMaps" },
+              { value: "Продвижение на Яндекс.Карты", label: "Продвижение на Яндекс.Карты" },
+              { value: "Услуги копирайтинга", label: "Услуги копирайтинга" },
+            ],
         }
     },
     methods: {
@@ -362,22 +373,27 @@ export default {
     },
     openModal() {
         this.$refs.modal.show();
-      }
+    },
+    toggleOpen() {
+      this.open = !this.open;
+    },
   },
 }
 </script>
 
 <style>
+    
     .header{
         background: var(--gradVertical);
         position: relative;
         height: 846px;
+        z-index: 1;
+        padding-top: 155px;
     }
     .header-text{
         max-width: 874px;
         position: relative;
         z-index: 10;
-        margin-top: 155px;
     }
     .header-text h1{
         font-size: 60px;
@@ -460,6 +476,8 @@ export default {
     .request-back{
         background: var(--gradVertical);
         margin-bottom: 110px;
+        position: relative;
+        z-index: 1;
     }
     .request-task,
     .request-form_wrapper{
@@ -514,6 +532,7 @@ export default {
         color: var(--btnRed2);
         font-weight: 500;
     }
+    
     .request-form_inpt input,
     .request-form_inpt textarea{
         background: none;
@@ -524,6 +543,7 @@ export default {
         width: 100%;
         outline: none;
         color: white;
+        position: relative;
     }
     .request-form_inpt textarea{
         resize: none;
@@ -548,6 +568,10 @@ export default {
         z-index: 10;
     }
     /* package cards */
+    .packages{
+        position: relative;
+        z-index: 1;
+    }
     .package-card{
         background: var(--gradRadial2);
         padding: 30px 50px 50px;
@@ -624,6 +648,8 @@ export default {
     .projects-back{
         background: var(--gradVertical);
         padding-bottom: 130px;
+        position: relative;
+        z-index: 1;
     }
     .project-card{
         padding: 40px 50px 50px;
@@ -680,6 +706,8 @@ export default {
     .partners-back{
         background: var(--gradVertical);
         padding-bottom: 130px;
+        position: relative;
+        z-index: 1;
     }
     .partners-line{
         display: block;
@@ -727,9 +755,11 @@ export default {
     }
     .requestServiceForm-input{
         width: 48%;
+        position: relative;
     }
     .requestServiceForm-input input,
-    .requestServiceForm-input textarea{
+    .requestServiceForm-input textarea,
+    .vs__dropdown-toggle{
         width: 100%;
         padding: 16px 25px;
         border: 2px solid var(--textBlue2);
@@ -755,13 +785,55 @@ export default {
     .requestServiceForm-inpts{
         row-gap: 30px;
     }
-    
-    
+    /* custom select */
+    @import "vue-select/dist/vue-select.css";
+    .vs__search,
+    .vs__clear{
+        display: none;
+    }
+    .vs__dropdown-toggle{
+        min-height: 72px;
+    }
+    .vs__open-indicator{
+        fill: #EF4456;
+    }
+    .vs__dropdown-menu{
+        background: var(--backBlack1);
+        top: 72px;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .vs__selected{
+        font-size: 20px;
+        line-height: 28px;
+        color: white;
+        padding: 0;
+        margin: 0;
+    }
+    .vs--searchable .vs__dropdown-toggle{
+        cursor: pointer;
+    }
+    .vs--single.vs--open .vs__selected, .vs--single.vs--loading .vs__selected{
+        position: unset;
+    }
+    .vs__dropdown-option{
+        padding: 0;
+        font-size: 20px;
+        line-height: 28px;
+        white-space: normal;
+    }
+    .vs__dropdown-option--highlight{
+        background: none;
+        color: #EF4456;
+    }
     
     /* media */
     @media (max-width:1400px){
         .header{
             height: 570px;
+            padding-top: 44px;
         }
         .mainHeader{
             max-width: 684px;
@@ -769,9 +841,6 @@ export default {
         }
         .topHeader{
             max-height: 280px;
-        }
-        .header-text{
-            margin-top: 44px;
         }
         .header-text p{
             margin: 35px 0 45px 0;
@@ -806,9 +875,6 @@ export default {
         }
         .topHeader{
             max-height: 280px;
-        }
-        .header-text{
-            margin-top: 44px;
         }
         .header-text h1{
             font-size: 48px;
@@ -927,6 +993,7 @@ export default {
         }
         .header{
             height: 741px;
+            padding-top: unset;
         }
         .mainHeader{
             max-width: 592px;

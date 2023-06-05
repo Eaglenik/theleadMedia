@@ -42,7 +42,7 @@
                 </form>
             </div>
         </div>
-        <div class="footer-footer">
+        <div v-if="!hideContactFooter && showFooterFooter" class="footer-footer">
             <div class="d-flex justify-content-between flex-lg-row flex-column gap-5">
                 <div class="footer-conracts d-flex flex-lg-column flex-sm-row flex-column justify-content-lg-center justify-content-between gap-4">
                     <div class="footer-contact">
@@ -51,7 +51,7 @@
                     </div>
                     <div class="footer-contact">
                         <h6>info@theleadmedia.uz</h6>
-                        <a href="#!">Написать сообщение</a>
+                        <a href="mailto:info@theleadmedia.uz">Написать сообщение</a>
                     </div>
                 </div>
                 <div class="footer-about d-flex justify-content-between flex-sm-row flex-column">
@@ -112,6 +112,16 @@ export default {
           element.style.height = `${element.scrollHeight}px`;
         }, 
     },
+    props: {
+    showFooterFooter: {
+      type: Boolean,
+      default: true
+    },
+    hideContactFooter: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>
 <style scoped>
@@ -128,6 +138,8 @@ export default {
     }
     .footer-question_back{
         background: var(--gradVertical);
+        position: relative;
+        z-index: 1;
     }
     .footer-question_header--img{
         position: relative;

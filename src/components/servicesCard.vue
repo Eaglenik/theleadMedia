@@ -147,6 +147,8 @@ export default {
         }
         .services{
             gap: 40px;
+            position: relative;
+            z-index: 1;
         }
     }
     @media (max-width:1200px){
