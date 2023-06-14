@@ -32,9 +32,9 @@
                           </ul>
                         </p>
                       </li>
-                      <li><a href="#!">Кейсы</a></li>
-                      <li><a href="#!">О нас</a></li> 
-                      <li class="d-md-none d-block"><a href="#!" >Контакты</a></li> 
+                      <li><router-link to="/cases">Кейсы</router-link></li>
+                      <li><router-link to="/about">О нас</router-link></li> 
+                      <li class="d-md-none d-block"><router-link to="/contact">Контакты</router-link></li> 
                     </ul>
                   </div>
                 </div>
@@ -76,9 +76,9 @@
             <b-dropdown-item @click="$router.push('/projects/mebelvitrina.uz')">MebelVitrina.uz</b-dropdown-item>
           </b-dropdown>
                  </li>
-                 <li class="navbarLi d-xxl-block d-none"><a href="#!" :class="{ active: activeDropdown === null && !isOpen }">Кейсы</a></li>
-                 <li class="navbarLi d-xxl-block d-none"><a href="#!" :class="{ active: activeDropdown === null && !isOpen }">О нас</a></li>
-                 <li class="navbarLi d-md-block d-none"><a href="#!">Контакты</a></li>
+                 <li class="navbarLi d-xxl-block d-none"><router-link to="/cases">Кейсы</router-link></li>
+                 <li class="navbarLi d-xxl-block d-none"><router-link to="/about">О нас</router-link></li>
+                 <li class="navbarLi d-md-block d-none"><router-link to="/contact">Контакты</router-link></li>
                  <li class="navbarLi d-md-block d-none" :class="{ active: activeDropdown === 'lang' }">
           <b-dropdown @shown="onShown('lang')" @hidden="onHidden('lang')" v-model="langDropdown">
             <template #button-content>
@@ -103,22 +103,60 @@
                </ul>
               </div>
           </div>
-            <div class="navbar-contact">
+            <div class="navbar-contact" @open-modal="showModal = true">
                 <a href="tel:+998 99 498 32 12" class="d-lg-block d-none">+998 99 498 32 12</a>
-                <a href="#!"><img src="../assets/images/icons/phone.svg" alt=""></a>
-                <a href="#!"><img src="../assets/images/icons/telegram.svg" alt=""></a>
+                <a href="#!" @click="showModal = true" ><img src="../assets/images/icons/phone.svg" alt=""></a>
+                <a href="https://t.me/+998994983212"><img src="../assets/images/icons/telegram.svg" alt=""></a>
             </div>
         </div>
+        <b-modal ref="modal"  v-model="showModal" id="modal-center" centered> 
+          <h6>Форма связи</h6>
+          <form action="URL" class="requestServiceForm" name="requestServiceForm">
+            <div class="requestServiceForm-inpts d-flex flex-wrap justify-content-between">
+              <div class="requestServiceForm-input">
+                <p>Имя*</p>
+                <input type="text" required> 
+              </div>
+              <div class="requestServiceForm-input">
+                <p>Телефон*</p>
+                <input type="number" required>
+              </div>
+              <div class="requestServiceForm-input">
+                <p>Ваш проект*</p>
+                <input type="text" required>
+              </div>
+              <div class="requestServiceForm-input">
+                <p>Ваш вопрос*</p>
+                <textarea v-model="review" name="requestServiceFormYoursQuestion" maxlength="500" required v-on:input="autoExpand"></textarea>
+              </div>
+            </div>
+            <div class="footer-question_footer d-flex justify-content-between align-items-start flex-column gap-4 mt-5">
+              <p>Нажимая на кнопку «Отправить», вы даете согласие на обработку персональных данных</p>
+              <div class="footer-question_btn d-flex align-items-center gap-5 flex-sm-row flex-column">
+                 капча
+                <main-button style="padding: 20px 30px; font-size: 22px; line-height: 31px;">Отправить</main-button>
+              </div>
+            </div>
+          </form>
+        </b-modal>
       </nav>
     </div>
 </template>
 
 <script>
+import { BModal } from 'bootstrap-vue-3'
+import mainButton from '@/components/UI/mainButton'
 export default {
+  components: {
+    BModal,
+    mainButton
+  },
   data() {
     return {
       servicesDropdown: null,
       projectsDropdown: null,
+      showModal: false,
+      showModal1: false,
       langDropdown: null,
       activeDropdown: null,
       isOpen: false,
@@ -143,6 +181,9 @@ export default {
     },
     toggleSidebar() {
       this.isOpen = !this.isOpen;
+    },
+    openModal() {
+      this.$refs.modal.show();
     }
   },
 };
@@ -152,8 +193,8 @@ export default {
     width: 100%;
     background: var(--backBlack1);
     position: sticky;
-    top: 0;
-    z-index: 1100;
+    top: -1px;
+    z-index: 1000;
   }
   .navbar{
     max-width: 1600px;
@@ -333,11 +374,11 @@ export default {
         position: fixed;
         top: 67px;
       }
-      .navbar{
-        padding: 20px;
-      }
-  }
-  @media (max-width:576px){
+    }
+    @media (max-width:576px){
+    .navbar{
+      padding: 20px;
+    }
     .navbar-list li a, .navbar-list button{
      font-size: 20px;
      line-height: 28px;

@@ -2,13 +2,23 @@
     <div class="app">
         <navbar></navbar>
         <router-view></router-view>
+        <footerr v-if="showFooter"></footerr>
+        <scroll-to-top-button></scroll-to-top-button>
+        <patternn></patternn>
     </div>
 </template>
 <script>
 import navbar from '@/components/navbar'
-import footer from '@/components/footer'
+import footerr from '@/components/footer'
+import ScrollToTopButton from '@/components/UI/ScrollToTopButton'
+import patternn from '@/components/UI/pattern.vue'
 export default {
-  components: { navbar, footer},
+  components: { navbar, footerr, ScrollToTopButton, patternn},
+  computed: {
+        showFooter() {
+            return !this.$route.meta.hideFooter && (this.$route.meta.showFooterFooter || !this.$route.meta.hideContactFooter);
+        }
+    }
 }
 </script>
 <style>
@@ -73,8 +83,8 @@ export default {
         width: 100%;
         padding: 0 40px;
         margin: 0 auto;
-        /* border: 1px solid red; */
     }
+    
     .app{
         background: var(--backBlack1);
         color: var(--textWhite);
@@ -96,6 +106,33 @@ export default {
         font-weight: 600;
         color: var(--btnRed2);
     }
+    
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+    }
+    /* breadcrumbs */
+    .breadcrumb-icon{
+      display: inherit;
+      margin: 0 15px;
+    }
+    .breadcrumbs{
+      margin-top: 40px;
+      margin-bottom: 70px;
+    }
+    .breadcrumb-link a{
+      color: var(--backBlack3) !important;
+      font-weight: 700 !important;
+      font-size: 18px;
+      line-height: 25px;
+    }
+    .breadcrumb-item.active span{
+      color: var(--backBlack3) !important;
+      font-weight: 500 !important;
+      font-size: 18px;
+      line-height: 25px;
+    }
+    
     @media (max-width:1200px){
        .title{
         font-size: 50px;

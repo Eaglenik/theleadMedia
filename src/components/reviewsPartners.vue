@@ -90,9 +90,12 @@
     }
     }
     @media (max-width:576px){
-        .review-item_text p{
-        font-size: 18px;
-        line-height: 25px;
-    }
+      .review-item_text p{
+          font-size: 18px;
+          line-height: 25px;
+      }
+      .review-item_img{
+        max-width: 220px;
+      }
     }
     </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="services-card">
+    <div class="services-card" >
       <div class="services-card_img">
         <img src="@/assets/images/services-card/services-card_arr.png" alt="">
         <img :src="require(`@/assets/images/services-card/${image}`)" alt="">
@@ -9,13 +9,22 @@
       <p class="services-description">{{ description }}</p>
       <div class="services-card_links d-flex align-items-center justify-content-between w-100">
         <router-link :to="link">Узнать больше <img src="@/assets/images/services-card/services-chevrone.svg" alt=""></router-link>
-        <button>Оставить заявку</button>
+        <button @click="openModal(title)">Оставить заявку</button>
       </div>
     </div>
   </template>
 <script>
+import { BModal } from 'bootstrap-vue-3';
 export default {
   name: 'ServicesCard',
+  components: {
+    BModal,
+  },
+  data() {
+    return {
+        showModal: false
+    }
+  },
   props: {
     title: String,
     price: String,
@@ -30,6 +39,11 @@ export default {
     },
     link() {
       return `/services/${this.slug}`;
+    }
+  },
+  methods: {
+    openModal() {
+      this.$emit('open-modal');
     }
   }
 }
@@ -133,6 +147,8 @@ export default {
         }
         .services{
             gap: 40px;
+            position: relative;
+            z-index: 1;
         }
     }
     @media (max-width:1200px){
