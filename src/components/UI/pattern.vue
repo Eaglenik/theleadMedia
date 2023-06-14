@@ -11,6 +11,10 @@
         <img class="patternRed" src="@/assets/images/pattern/patternRed.svg" alt="">
         <img class="patternWhite" src="@/assets/images/pattern/patternWhite.svg" alt="">
         <img class="patternRed" src="@/assets/images/pattern/patternRed.svg" alt="">
+        <img class="patternWhite" src="@/assets/images/pattern/patternWhite.svg" alt="">
+        <img class="patternRed" src="@/assets/images/pattern/patternRed.svg" alt="">
+        <img class="patternWhite" src="@/assets/images/pattern/patternWhite.svg" alt="">
+        <img class="patternRed" src="@/assets/images/pattern/patternRed.svg" alt="">
     </div>
 </template>
 <script>

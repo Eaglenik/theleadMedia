@@ -17,7 +17,7 @@
                 <p>г. Ташкент, ул. Таллимаржон, 1/1</p>
                 <div class="contact-number">
                     <p>+998 99 498 32 12</p>
-                    <a href="#!">Заказать звонок</a>
+                    <a href="#!" @click="showModal = true">Заказать звонок</a>
                     <div class="contact-soc d-flex gap-5">
                         <a href="https://wa.me/998994983212">WhatsApp</a>
                         <a href="https://t.me/+998994983212">Telegram</a>
@@ -32,12 +32,55 @@
                 <div style="position:relative;overflow:hidden;"><a href="https://yandex.uz/maps/10335/tashkent/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Ташкент</a><a href="https://yandex.uz/maps/10335/tashkent/house/YkAYdQdlQUUBQFprfX52eXprYQ==/?ll=69.305806%2C41.278685&utm_medium=mapframe&utm_source=maps&z=17.09" style="color:#eee;font-size:12px;position:absolute;top:14px;">Улица Таллимаржон, 1/1 — Яндекс Карты</a><iframe src="https://yandex.uz/map-widget/v1/?ll=69.305806%2C41.278685&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgoxNTIyNTExNTAxEjJPyrt6YmVraXN0b24sIFRvc2hrZW50LCBUYWxsaW1hcmpvbiBrb8q7Y2hhc2ksIDEvMSIKDZKcikIVXx0lQg%2C%2C&z=17.09" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
             </div>
         </section>
+        <b-modal ref="modal"  v-model="showModal" id="modal-center" centered> 
+                        <h6>Форма связи</h6>
+                        <form action="URL" class="requestServiceForm" name="requestServiceForm">
+            <div class="requestServiceForm-inpts d-flex flex-wrap justify-content-between">
+              <div class="requestServiceForm-input">
+                <p>Имя*</p>
+                <input type="text" required> 
+              </div>
+              <div class="requestServiceForm-input">
+                <p>Телефон*</p>
+                <input type="number" required>
+              </div>
+              <div class="requestServiceForm-input">
+                <p>Ваш проект*</p>
+                <input type="text" required>
+              </div>
+              <div class="requestServiceForm-input">
+                <p>Ваш вопрос*</p>
+                <textarea v-model="review" name="requestServiceFormYoursQuestion" maxlength="500" required v-on:input="autoExpand"></textarea>
+              </div>
+            </div>
+            <div class="footer-question_footer d-flex justify-content-between align-items-start flex-column gap-4 mt-5">
+              <p>Нажимая на кнопку «Отправить», вы даете согласие на обработку персональных данных</p>
+              <div class="footer-question_btn d-flex align-items-center gap-5 flex-sm-row flex-column">
+                 капча
+                <main-button style="padding: 20px 30px; font-size: 22px; line-height: 31px;">Отправить</main-button>
+              </div>
+            </div>
+                        </form>
+                    </b-modal>
     </div>
     <div class="line"></div>
 </template>
 <script>
+import mainButton from '@/components/UI/mainButton'
 export default {
-    
+    components: {
+        mainButton
+    },
+    data() {
+        return{
+            showModal: false,
+        }
+    },
+    methods: {
+        openModal() {
+          this.$refs.modal.show();
+        }
+    },
 }
 </script>
 <style scoped>

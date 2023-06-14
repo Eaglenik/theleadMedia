@@ -1,7 +1,7 @@
 <template>
     <footer class="footer">
         <div class="footer-question_back">
-            <div class="footer-question my-container">
+            <div class="footer-question my-container" id="list-item-8">
                 <div class="footer-question_header d-flex justify-content-between align-items-center flex-md-row flex-column">
                     <div class="footer-question_header--img">
                         <img src="@/assets/images/footer-back.png" alt="">
@@ -45,14 +45,44 @@
         <div v-if="!hideContactFooter && showFooterFooter" class="footer-footer">
             <div class="d-flex justify-content-between flex-lg-row flex-column gap-5">
                 <div class="footer-conracts d-flex flex-lg-column flex-sm-row flex-column justify-content-lg-center justify-content-between gap-4">
-                    <div class="footer-contact">
+                    <div class="footer-contact" @open-modal="showModal = true">
                         <h6>+998 99 498 32 12</h6>
-                        <a href="#!">Заказать звонок</a>
+                        <a href="#!" @click="showModal = true">Заказать звонок</a>
                     </div>
                     <div class="footer-contact">
                         <h6>info@theleadmedia.uz</h6>
                         <a href="mailto:info@theleadmedia.uz">Написать сообщение</a>
                     </div>
+                    <b-modal ref="modal"  v-model="showModal" id="modal-center" centered> 
+                        <h6>Форма связи</h6>
+                        <form action="URL" class="requestServiceForm" name="requestServiceForm">
+            <div class="requestServiceForm-inpts d-flex flex-wrap justify-content-between">
+              <div class="requestServiceForm-input">
+                <p>Имя*</p>
+                <input type="text" required> 
+              </div>
+              <div class="requestServiceForm-input">
+                <p>Телефон*</p>
+                <input type="number" required>
+              </div>
+              <div class="requestServiceForm-input">
+                <p>Ваш проект*</p>
+                <input type="text" required>
+              </div>
+              <div class="requestServiceForm-input">
+                <p>Ваш вопрос*</p>
+                <textarea v-model="review" name="requestServiceFormYoursQuestion" maxlength="500" required v-on:input="autoExpand"></textarea>
+              </div>
+            </div>
+            <div class="footer-question_footer d-flex justify-content-between align-items-start flex-column gap-4 mt-5">
+              <p>Нажимая на кнопку «Отправить», вы даете согласие на обработку персональных данных</p>
+              <div class="footer-question_btn d-flex align-items-center gap-5 flex-sm-row flex-column">
+                 капча
+                <main-button style="padding: 20px 30px; font-size: 22px; line-height: 31px;">Отправить</main-button>
+              </div>
+            </div>
+                        </form>
+                    </b-modal>
                 </div>
                 <div class="footer-about d-flex justify-content-between flex-sm-row flex-column">
                     <div class="footer-about_list">
@@ -60,12 +90,12 @@
                         <div class="d-flex gap-lg-5 ga-1 flex-lg-row flex-column">
                             <ul>
                                 <li><router-link to="/about" >О нас</router-link></li>
-                                <li><router-link to="/" >Предоставляемые услуги</router-link></li>
-                                <li><router-link to="/" >Реализованные кейсы</router-link></li>
+                                <li><router-link :to="{path: '/', hash: '#services'}" >Предоставляемые услуги</router-link></li>
+                                <li><router-link :to="{path: '/', hash: '#cases'}" >Реализованные кейсы</router-link></li>
                             </ul>
                             <ul>
-                                <li><router-link to="/" >Клиенты</router-link></li>
-                                <li><router-link to="/" >Отзывы</router-link></li>
+                                <li><router-link :to="{path: '/', hash: '#clients'}" >Клиенты</router-link></li>
+                                <li><router-link :to="{path: '/', hash: '#reviews'}" >Отзывы</router-link></li>
                                 <li><router-link to="/contact" >Контакты</router-link></li>
                             </ul>
                         </div>
@@ -96,13 +126,15 @@
 </template>
 <script>
 import mainButton from './UI/mainButton.vue';
+
 export default {
     components: {
-        mainButton
+        mainButton,
     },
     data() {
         return{
             review: '',
+            showModal: false,
         }
     },
     methods: {
@@ -111,6 +143,9 @@ export default {
           element.style.height = '100px';
           element.style.height = `${element.scrollHeight}px`;
         }, 
+        openModal() {
+          this.$refs.modal.show();
+        }
     },
     props: {
     showFooterFooter: {

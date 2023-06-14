@@ -2,10 +2,40 @@
     <div>
         <section class="header">
                  <div class="header-back my-container">
-                     <div class="header-text">
+                     <div class="header-text" @open-modal="showModal1 = true">
                          <h1>Оказание услуг в области онлайн-маркетинга</h1>
                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                         <mainButton>Обсудить проект</mainButton>
+                         <mainButton @click="showModal1 = true">Обсудить проект</mainButton>
+                         <b-modal ref="modal"  v-model="showModal1" id="modal-center" centered> 
+          <h6>Форма связи</h6>
+          <form action="URL" class="requestServiceForm" name="requestServiceForm">
+            <div class="requestServiceForm-inpts d-flex flex-wrap justify-content-between">
+              <div class="requestServiceForm-input">
+                <p>Имя*</p>
+                <input type="text" required> 
+              </div>
+              <div class="requestServiceForm-input">
+                <p>Телефон*</p>
+                <input type="number" required>
+              </div>
+              <div class="requestServiceForm-input">
+                <p>Ваш проект*</p>
+                <input type="text" required>
+              </div>
+              <div class="requestServiceForm-input">
+                <p>Ваш вопрос*</p>
+                <textarea v-model="review" name="requestServiceFormYoursQuestion" maxlength="500" required v-on:input="autoExpand"></textarea>
+              </div>
+            </div>
+            <div class="footer-question_footer d-flex justify-content-between align-items-start flex-column gap-4 mt-5">
+              <p>Нажимая на кнопку «Отправить», вы даете согласие на обработку персональных данных</p>
+              <div class="footer-question_btn d-flex align-items-center gap-5 flex-sm-row flex-column">
+                 капча
+                <main-button style="padding: 20px 30px; font-size: 22px; line-height: 31px;">Отправить</main-button>
+              </div>
+            </div>
+          </form>
+        </b-modal>
                      </div>
                  </div>
                  <div class="chevrone-horizontal">
@@ -44,9 +74,9 @@
                          <p>клиентов среди крупного, среднего и малого бизнеса</p>
                      </b-col>
                  </b-row>
-                 <h6 class="synopsis-last_p">Нам доверяют крупнейшие компании, и вы также сможете в этом убедиться, воспользовавшись нашими услугами</h6>
+                 <h6 class="synopsis-last_p" id="services">Нам доверяют крупнейшие компании, и вы также сможете в этом убедиться, воспользовавшись нашими услугами</h6>
         </section>
-        <section class="services my-container d-flex flex-wrap justify-content-between" id="services">
+        <section class="services my-container d-flex flex-wrap justify-content-between" >
              <services-card
                  v-for="(card, index) in cards"
                 :key="index"
@@ -205,7 +235,7 @@
                              <img src="@/assets/images/services-card/services-chevrone.svg" alt="">
                          </router-link>
                 </div>
-                <h5 class="title"><span>Реализованные</span> кейсы</h5>
+                <h5 class="title" id="cases"><span>Реализованные</span> кейсы</h5>
                 <casesSlider></casesSlider>
             </div>
         </section>
@@ -262,13 +292,13 @@
                 </div>
             </div>
         </section>
-        <div class="line"></div>
+        <div class="line" id="clients"></div>
         <section class="partners-back">
             <div class="partners my-container">
-                <h6 class="title"><span>Нам</span> доверяют</h6>
-                <logo-slider></logo-slider>
+                <h6 class="title" ><span>Нам</span> доверяют</h6>
+                <logo-slider id="reviews"></logo-slider>
                 <div class="partners-line"></div>
-                <reviews-partners></reviews-partners>
+                <reviews-partners ></reviews-partners>
             </div>
         </section>
         <section class="faq my-container">
@@ -308,8 +338,8 @@ export default {
         return{
             review: '',
             showModal: false,
+            showModal1: false,
             open: false,
-            selectedOption: null,
             cards: [
                 {
                     title: '<span>Создание</span> WEB-сайтов', 
@@ -354,7 +384,7 @@ export default {
           slug: 'copywriting'
                 },
             ],
-            value: "",
+            value: null,
             options: [
               { value: "Создание WEB-сайтов", label: "Создание WEB-сайтов" },
               { value: "SEO-продвижение", label: "SEO-продвижение" },

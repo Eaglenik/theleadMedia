@@ -1,5 +1,5 @@
 <template>
-    <div class="services-card">
+    <div class="services-card" >
       <div class="services-card_img">
         <img src="@/assets/images/services-card/services-card_arr.png" alt="">
         <img :src="require(`@/assets/images/services-card/${image}`)" alt="">
@@ -9,7 +9,7 @@
       <p class="services-description">{{ description }}</p>
       <div class="services-card_links d-flex align-items-center justify-content-between w-100">
         <router-link :to="link">Узнать больше <img src="@/assets/images/services-card/services-chevrone.svg" alt=""></router-link>
-        <button @click="openModal">Оставить заявку</button>
+        <button @click="openModal(title)">Оставить заявку</button>
       </div>
     </div>
   </template>

@@ -4,7 +4,7 @@
           <div class="header-text">
              <h1>{{ currentService.title }}</h1>
              <p>{{ currentService.content }}</p>
-              <mainButton>{{currentService.btnText}}</mainButton>
+              <mainButton @click="showModal = true">{{currentService.btnText}}</mainButton>
           </div>
       </div>
       <div class="chevrone-horizontal">
@@ -30,7 +30,7 @@
         <b-breadcrumb-item  active>{{ currentService.title }}</b-breadcrumb-item>
       </b-breadcrumb>
     </section>
-    <section class="service-main my-container">
+    <section class="service-main my-container" data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" tabindex="0">
       <div class="service-navigation">
         <accordion>
           <accordion-item ref="serviceAccordion1" class="mb-4">
@@ -44,14 +44,12 @@
                     {{ service.title }}
                   </template>
                   <template v-slot:accordion-content>
-                    <ul class="subAccordion-content-list">
-                      <li v-for="category in service.categories" :key="category.id">
-                        <a href="#!">{{ category.title }}</a>
-                      </li>
-                    </ul>
+                    <div class="subAccordion-content-list list-group" id="list-example">
+                        <a v-for="category in service.categories" :key="category.id" @click.prevent="scrollToListItem(category.id)" :href="'#list-item-' + category.id" class="navigation__link">{{ category.title }}</a>
+                    </div>
                   </template>
                  </accordion-item>
-                 <div v-else :key="service.slug"  @click="$router.push({ name: 'Service', params: { slug: service.slug } })">
+                 <div v-else :key="service.slug"  @click="$router.push({ name: 'Service', params: { slug: service.slug } })" v-b-scrollspy:listgroup-ex>
                   <a class="subAccordion-header-title">
                     {{ service.title }}
                   </a>
@@ -85,12 +83,12 @@
           </accordion-item>
         </accordion>
       </div>
-      <div class="service-content">
+      <div class="service-content" >
         <div class="service-description" >
           <p v-html="currentService.serviceDescription"></p>
         </div>
-        <div class="service-services">
-          <h6 class="title" v-html="currentService.seriveServicesTitle"></h6>
+        <div class="service-services" id="list-item-1">
+          <h6 class="title" v-html="currentService.seriveServicesTitle" ></h6>
           <div class="services-service_cards d-flex justify-content-between flex-xl-row flex-column gap-xl-0 gap-sm-5 gap-3">
             <div class="services-service_card">
               <h4>{{ currentService.serviceCardTitle1 }}</h4>
@@ -133,11 +131,84 @@
             </div>
           </form>
         </div>
-        <div class="tariff-plans">
-          <h6 class="title">Тарифные <span>планы</span></h6>
+        <div class="tariff-plans" id="list-item-2">
+          <h6 class="title" >Тарифные <span>планы</span></h6>
+          <div class="tariff-cards">
+            <div v-for="(plan, index) in currentService.plans" :key="index" class="tariff-card">
+              <div class="tariff-card_header d-flex align-items-sm-center align-items-start flex-sm-row flex-column gap-2">
+                <h6>{{ plan.title }}</h6>
+                <p>{{ plan.titleDes }}</p>
+              </div>
+              <div class="tariff-card_line"></div>
+              <div class="tariff-card_body d-flex justify-content-between flex-xl-row flex-lg-column flex-md-row flex-column">
+                <div class="tariff-payment d-flex flex-column gap-3">
+                  <div>
+                    <h6>Оплата за первый месяц</h6>
+                    <div style="margin-bottom: 15px;">
+                      <h5>от <span>{{ plan.paymentFirstMonthPrice }}</span></h5>
+                      <p>{{ plan.paymentFirstMonthDes }}</p>
+                    </div>
+                    <div>
+                      <h5>от <span>{{ plan.paymentFirstMonthPrice2 }}</span></h5>
+                      <p>{{ plan.paymentFirstMonthDes2 }}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <h6>Оплата за следующие месяцы</h6>
+                    <div style="margin-bottom: 15px;">
+                      <h5>от <span>{{ plan.paymentNextMonthPrice }}</span></h5>
+                      <p>{{ plan.paymentNextMonthDes }}</p>
+                    </div>
+                    <div>
+                      <h5>от <span>{{ plan.paymentNextMonthPrice2 }}</span></h5>
+                      <p>{{ plan.paymentNextMonthDes2 }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="tariff-services">
+                  <h6>Включенные услуги</h6>
+                  <ul>
+                    <li>
+                      <span>{{ plan.tariffServicesListTitle1}}</span>
+                      <br>
+                      <p>{{ plan.tariffServicesListDes1}}</p>
+                    </li>
+                    <li>
+                      <span>{{ plan.tariffServicesListTitle2}}</span>
+                      <br>
+                      <p>{{ plan.tariffServicesListDes2}}</p>
+                    </li>
+                    <li>
+                      <span>{{ plan.tariffServicesListTitle3}}</span>
+                      <br>
+                      <p>{{ plan.tariffServicesListDes3}}</p>
+                    </li>
+                    <li>
+                      <span>{{ plan.tariffServicesListTitle4}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="tariff-card_line"></div>
+              <div class="tariff-warning">
+                <p><span>*</span>В первый месяц осуществляется настройка, запуск и поддержка. В следующие месяцы — поддержка</p>
+                <p><span>*</span>Рекламный бюджет не входит в стоимость данного тарифного плана</p>
+              </div>
+              <div class="tariff-card_footer d-flex justify-content-between flex-xxl-row flex-column">
+                <div class="tariff-budget flex-wrap gap-2 d-flex justify-content-between align-items-center">
+                  <div class="tariff-budget_text">
+                    <p>Рекомендуемый бюджет</p>
+                    <span>(в зависимости от ниши)</span>
+                  </div>
+                  <p>{{ plan.tariffReccomendBudget }}</p>
+                </div>
+                <button @click="showModal = true">Оставить заявку</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="points">
-          <h6 class="title" v-html="currentService.pointTitleOne"></h6>
+        <div class="points" id="list-item-3">
+          <h6 class="title" v-html="currentService.pointTitleOne" ></h6>
           <div class="d-flex justify-content-between flex-wrap gap-4">
             <div class="service-point">
               <div class="service-point_img">
@@ -173,8 +244,8 @@
             </div>
           </div>
         </div>
-        <div class="aboutService">
-          <h6 class="title" v-html="currentService.aboutServiceTitleOne"></h6>
+        <div class="aboutService" id="list-item-4">
+          <h6 class="title" v-html="currentService.aboutServiceTitleOne" ></h6>
           <div class="aboutService-first">
             <span>{{ currentService.aboutServiceTitleText1 }}</span>
             <p>{{ currentService.aboutServiceDescriptionText1 }}</p>
@@ -196,8 +267,8 @@
             <p>{{ currentService.aboutServiceDescriptionText5 }}</p>
           </div>
         </div>
-        <div class="aboutService">
-          <h6 class="title" v-html="currentService.aboutServiceTitleTwo"></h6>
+        <div class="aboutService" id="list-item-5">
+          <h6 class="title" v-html="currentService.aboutServiceTitleTwo" ></h6>
           <ul>
             <li><span>{{ currentService.aboutServiceTitleList1 }}</span></li>
             <li><span>{{ currentService.aboutServiceTitleList2 }}</span></li>
@@ -205,12 +276,12 @@
           </ul>
           <p v-html="currentService.aboutServiceDescriptionList1"></p>
         </div>
-        <div class="servicesSlider">
-          <h5 class="title"><span>Реализованные</span> кейсы</h5>
+        <div class="servicesSlider" id="list-item-6">
+          <h5 class="title" ><span>Реализованные</span> кейсы</h5>
           <cases-slider ></cases-slider>
         </div>
-        <div class="points">
-          <h6 class="title" v-html="currentService.pointTitleTwo"></h6>
+        <div class="points" id="list-item-7">
+          <h6 class="title" v-html="currentService.pointTitleTwo" ></h6>
           <div class="d-flex justify-content-between flex-wrap gap-4">
             <div class="service-point">
               <div class="service-point_img">
@@ -263,7 +334,46 @@
           </div>
         </div>
       </div>
+      <b-modal ref="modal"  v-model="showModal" id="modal-center" centered> 
+                    <h6>Оставьте заявку и наш менеджер свяжется с вами в ближайшее время</h6>
+                    <form action="URL" class="requestServiceForm" name="requestServiceForm">
+                        <div class="requestServiceForm-inpts d-flex flex-wrap justify-content-between">
+                            <div class="requestServiceForm-input">
+                                <p>Имя*</p>
+                                <input type="text" required> 
+                            </div>
+                            <div class="requestServiceForm-input">
+                                <p>Телефон*</p>
+                                <input type="number" required>
+                            </div>
+                            <div class="requestServiceForm-input">
+                                <p>Электронная почта</p>
+                                <input type="text">
+                            </div>
+                            <div class="requestServiceForm-input">
+                                <p>Ваш проект*</p>
+                                <input type="text" required>
+                            </div>
+                            <div class="requestServiceForm-input">
+                                <p>Вид услуги*</p>
+                                <v-select v-model="value" :options="options"/>
+                            </div>
+                            <div class="requestServiceForm-input">
+                                <p>Комментарий к заявке*</p>
+                                <textarea v-model="review" name="requestServiceFormYoursQuestion" maxlength="500" required v-on:input="autoExpand"></textarea>
+                            </div>
+                        </div>
+                        <div class="footer-question_footer d-flex justify-content-between align-items-lg-center align-items-start flex-lg-row flex-column gap-lg-0 gap-4 mt-5">
+                            <p>Нажимая на кнопку «Отправить», вы даете согласие на обработку персональных данных</p>
+                            <div class="footer-question_btn d-flex align-items-center gap-5 flex-sm-row flex-column">
+                            капча
+                                <main-button style="padding: 20px 30px; font-size: 22px; line-height: 31px;">Отправить</main-button>
+                            </div>
+                        </div>
+                </form>
+      </b-modal>
     </section>
+
     <div class="line"></div>
   </template>
   <script>
@@ -272,13 +382,16 @@
   import accordion from '@/components/accordion'
   import accordionItem from '@/components/accordion-item'
   import casesSlider from '@/components/casesSlider'
+  import vSelect from "vue-select";
+  
   export default {
     components: {
       mainButton,
       BBreadcrumb,
       accordion,
       accordionItem,
-      casesSlider
+      casesSlider,
+      vSelect
     },
     props: {
       serviceCardLink1: String,
@@ -286,6 +399,7 @@
     },
     data() {
       return {
+        showModal: false,
         services: [
           {
             slug: 'web',
@@ -306,6 +420,66 @@
               {
                 id: 3,
                 title: 'Рубрика 1.3'
+              }
+            ],
+            plans: [
+              { 
+                title: 'Light',
+                titleDes: 'Для быстрого старта с небольшим бюджетом',
+                paymentFirstMonthPrice: '2 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '3 000 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '1 200 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '1 600 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: '«Горячее» ядро',
+                tariffServicesListDes1: 'прорабатываются основные ключевые слова, ключевые слова общего характера не добавляются',
+                tariffServicesListTitle2: '2 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffReccomendBudget: '$ 200–300',
+              },
+              { 
+                title: 'Optimum',
+                titleDes: 'Для полноценного запуска на длительный срок',
+                paymentFirstMonthPrice: '3 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '4 500 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '1 600 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '2 000 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: '«Широкое» ядро',
+                tariffServicesListDes1: 'прорабатываются «горячие» и основные ключевые слова общего характера',
+                tariffServicesListTitle2: '2 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffReccomendBudget: '$ 300–600',
+              },
+              { 
+                title: 'Full',
+                titleDes: 'Для полноценного запуска на длительный срок',
+                paymentFirstMonthPrice: '4 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '6 000 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '2 000 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '2 500 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: 'Максимально «широкое» ядро',
+                tariffServicesListDes1: 'прорабатываются не только «горячие», но и ключевые слова общего характера',
+                tariffServicesListTitle2: '3 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffServicesListTitle4: 'Поисковая и баннерная реклама',
+                tariffReccomendBudget: 'от $ 600',
               }
             ],
             serviceDescription: 'ООО «TheLead Media» предлагает услуги профессиональной разработки сайтов в Ташкенте. Над созданием интернет-магазинов, корпоративных проектов и других ресурсов работают квалифицированные специалисты с большим опытом.<br><br>Для создания сайтов в Узбекистане используются лучшие CMS (системы управления веб-содержимым) и другие программы, подбор которых осуществляется индивидуально. Персональный подход применяется и при выборе тарифных пакетов, рассчитанных на сайты разных типов и масштабов.',
@@ -338,6 +512,66 @@
                 title: 'Рубрика 1.3'
               }
             ],
+            plans: [
+              { 
+                title: 'Light',
+                titleDes: 'Для быстрого старта с небольшим бюджетом',
+                paymentFirstMonthPrice: '2 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '3 000 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '1 200 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '1 600 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: '«Горячее» ядро',
+                tariffServicesListDes1: 'прорабатываются основные ключевые слова, ключевые слова общего характера не добавляются',
+                tariffServicesListTitle2: '2 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffReccomendBudget: '$ 200–300',
+              },
+              { 
+                title: 'Optimum',
+                titleDes: 'Для полноценного запуска на длительный срок',
+                paymentFirstMonthPrice: '3 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '4 500 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '1 600 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '2 000 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: '«Широкое» ядро',
+                tariffServicesListDes1: 'прорабатываются «горячие» и основные ключевые слова общего характера',
+                tariffServicesListTitle2: '2 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffReccomendBudget: '$ 300–600',
+              },
+              { 
+                title: 'Full',
+                titleDes: 'Для полноценного запуска на длительный срок',
+                paymentFirstMonthPrice: '4 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '6 000 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '2 000 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '2 500 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: 'Максимально «широкое» ядро',
+                tariffServicesListDes1: 'прорабатываются не только «горячие», но и ключевые слова общего характера',
+                tariffServicesListTitle2: '3 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffServicesListTitle4: 'Поисковая и баннерная реклама',
+                tariffReccomendBudget: 'от $ 600',
+              }
+            ],
             serviceDescription: 'ООО «TheLead Media» оказывает комплекс услуг, направленный на повышение эффективности сайтов.<br><br>Одним из направлений нашей деятельности является seo-продвижение. Большой опыт и применение лучших методов позволили нам достичь солидных результатов в продвижении сайтов в Ташкенте. Ознакомьтесь с общим описанием услуги и особенностями нашего предложения.<br><br>Если вас заинтересовала перспектива заказать качественную seo-оптимизацию в Узбекистане, обратитесь к нашему консультанту по телефону +998 (99) 498-32-12.',
             seriveServicesTitle: 'Услуги <span>по SEO-продвижению</span>',
             serviceCardTitle1: 'qwe',
@@ -368,24 +602,84 @@
                 title: 'Как контекстная реклама поможет вашему проекту?'
               },
               {
-                id: 3,
+                id: 4,
                 title: 'Этапы настройки и ведения контекстной рекламы'
               },
               {
-                id: 1,
+                id: 5,
                 title: 'Результаты поддержки контекстной рекламы '
               },
               {
-                id: 2,
+                id: 6,
                 title: 'Реализованные кейсы'
               },
               {
-                id: 3,
+                id: 7,
                 title: 'Почему нам доверяют настройку рекламы?'
               },
               {
-                id: 3,
+                id: 8,
                 title: 'Задать вопрос'
+              }
+            ],
+            plans: [
+              { 
+                title: 'Light',
+                titleDes: 'Для быстрого старта с небольшим бюджетом',
+                paymentFirstMonthPrice: '2 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '3 000 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '1 200 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '1 600 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: '«Горячее» ядро',
+                tariffServicesListDes1: 'прорабатываются основные ключевые слова, ключевые слова общего характера не добавляются',
+                tariffServicesListTitle2: '2 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffReccomendBudget: '$ 200–300',
+              },
+              { 
+                title: 'Optimum',
+                titleDes: 'Для полноценного запуска на длительный срок',
+                paymentFirstMonthPrice: '3 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '4 500 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '1 600 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '2 000 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: '«Широкое» ядро',
+                tariffServicesListDes1: 'прорабатываются «горячие» и основные ключевые слова общего характера',
+                tariffServicesListTitle2: '2 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffReccomendBudget: '$ 300–600',
+              },
+              { 
+                title: 'Full',
+                titleDes: 'Для полноценного запуска на длительный срок',
+                paymentFirstMonthPrice: '4 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '6 000 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '2 000 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '2 500 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: 'Максимально «широкое» ядро',
+                tariffServicesListDes1: 'прорабатываются не только «горячие», но и ключевые слова общего характера',
+                tariffServicesListTitle2: '3 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffServicesListTitle4: 'Поисковая и баннерная реклама',
+                tariffReccomendBudget: 'от $ 600',
               }
             ],
             serviceDescription: 'ООО «TheLead Media» предлагает профессиональные услуги контекстной рекламы в Узбекистане. Работы проводятся квалифицированными специалистами.<br><br>В компании применяется дифференцированный подход к обслуживанию. Мы подбираем оптимальные тарифные пакеты в зависимости от требований и возможностей каждого клиента.',
@@ -456,6 +750,66 @@
                 title: 'Рубрика 1.3'
               }
             ],
+            plans: [
+              { 
+                title: 'Light',
+                titleDes: 'Для быстрого старта с небольшим бюджетом',
+                paymentFirstMonthPrice: '2 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '3 000 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '1 200 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '1 600 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: '«Горячее» ядро',
+                tariffServicesListDes1: 'прорабатываются основные ключевые слова, ключевые слова общего характера не добавляются',
+                tariffServicesListTitle2: '2 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffReccomendBudget: '$ 200–300',
+              },
+              { 
+                title: 'Optimum',
+                titleDes: 'Для полноценного запуска на длительный срок',
+                paymentFirstMonthPrice: '3 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '4 500 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '1 600 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '2 000 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: '«Широкое» ядро',
+                tariffServicesListDes1: 'прорабатываются «горячие» и основные ключевые слова общего характера',
+                tariffServicesListTitle2: '2 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffReccomendBudget: '$ 300–600',
+              },
+              { 
+                title: 'Full',
+                titleDes: 'Для полноценного запуска на длительный срок',
+                paymentFirstMonthPrice: '4 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '6 000 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '2 000 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '2 500 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: 'Максимально «широкое» ядро',
+                tariffServicesListDes1: 'прорабатываются не только «горячие», но и ключевые слова общего характера',
+                tariffServicesListTitle2: '3 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffServicesListTitle4: 'Поисковая и баннерная реклама',
+                tariffReccomendBudget: 'от $ 600',
+              }
+            ],
             serviceDescription: 'ООО «TheLead Media» предлагает услуги по размещению на Гугл картах в Ташкенте и других городах Узбекистана. Работы проводят квалифицированные специалисты.<br><br>Для продвижения в Google My Business используются самые эффективные и многократно проверенные методы. Клиентам обеспечены приемлемые для Узбекистана расценки и индивидуальный подход в обслуживании.<br><br>Ознакомьтесь с общим описанием услуг по регистрации на Гугл картах. Также на этой странице выделены особенности сервиса от нашей компании.',
             seriveServicesTitle: 'Услуги <span>по продвижению на GoogleMaps</span>',
             serviceCardTitle1: 'qwe',
@@ -484,6 +838,66 @@
               {
                 id: 3,
                 title: 'Рубрика 1.3'
+              }
+            ],
+            plans: [
+              { 
+                title: 'Light',
+                titleDes: 'Для быстрого старта с небольшим бюджетом',
+                paymentFirstMonthPrice: '2 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '3 000 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '1 200 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '1 600 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: '«Горячее» ядро',
+                tariffServicesListDes1: 'прорабатываются основные ключевые слова, ключевые слова общего характера не добавляются',
+                tariffServicesListTitle2: '2 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffReccomendBudget: '$ 200–300',
+              },
+              { 
+                title: 'Optimum',
+                titleDes: 'Для полноценного запуска на длительный срок',
+                paymentFirstMonthPrice: '3 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '4 500 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '1 600 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '2 000 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: '«Широкое» ядро',
+                tariffServicesListDes1: 'прорабатываются «горячие» и основные ключевые слова общего характера',
+                tariffServicesListTitle2: '2 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffReccomendBudget: '$ 300–600',
+              },
+              { 
+                title: 'Full',
+                titleDes: 'Для полноценного запуска на длительный срок',
+                paymentFirstMonthPrice: '4 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '6 000 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '2 000 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '2 500 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: 'Максимально «широкое» ядро',
+                tariffServicesListDes1: 'прорабатываются не только «горячие», но и ключевые слова общего характера',
+                tariffServicesListTitle2: '3 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffServicesListTitle4: 'Поисковая и баннерная реклама',
+                tariffReccomendBudget: 'от $ 600',
               }
             ],
             serviceDescription: 'ООО «TheLead Media» предлагает услуги по размещению на Яндекс.Картах в Ташкенте и других городах Узбекистана. Все работы проводят квалифицированные специалисты с большим опытом.<br><br>Для оказания помощи в регистрации на Yandex бизнес используются максимально эффективные и проверенные методы. Клиентам обеспечена приемлемая для Узбекистана стоимость раскрутки сайта на Яндекс картах и персональный подход в обслуживании.<br><br>Ознакомьтесь с общим описанием услуги, предлагаемой на этой странице.',
@@ -516,6 +930,66 @@
                 title: 'Рубрика 1.3'
               }
             ],
+            plans: [
+              { 
+                title: 'Light',
+                titleDes: 'Для быстрого старта с небольшим бюджетом',
+                paymentFirstMonthPrice: '2 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '3 000 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '1 200 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '1 600 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: '«Горячее» ядро',
+                tariffServicesListDes1: 'прорабатываются основные ключевые слова, ключевые слова общего характера не добавляются',
+                tariffServicesListTitle2: '2 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffReccomendBudget: '$ 200–300',
+              },
+              { 
+                title: 'Optimum',
+                titleDes: 'Для полноценного запуска на длительный срок',
+                paymentFirstMonthPrice: '3 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '4 500 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '1 600 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '2 000 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: '«Широкое» ядро',
+                tariffServicesListDes1: 'прорабатываются «горячие» и основные ключевые слова общего характера',
+                tariffServicesListTitle2: '2 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffReccomendBudget: '$ 300–600',
+              },
+              { 
+                title: 'Full',
+                titleDes: 'Для полноценного запуска на длительный срок',
+                paymentFirstMonthPrice: '4 000 000 сум',
+                paymentFirstMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentFirstMonthPrice2: '6 000 000 сум',
+                paymentFirstMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                paymentNextMonthPrice: '2 000 000 сум',
+                paymentNextMonthDes: 'за одну систему: Google Ads или Яндекс.Директ',
+                paymentNextMonthPrice2: '2 500 000 сум',
+                paymentNextMonthDes2: 'за две системы: Google Ads и Яндекс.Директ',
+                tariffServicesListTitle1: 'Максимально «широкое» ядро',
+                tariffServicesListDes1: 'прорабатываются не только «горячие», но и ключевые слова общего характера',
+                tariffServicesListTitle2: '3 варианта текстовых объявлений',
+                tariffServicesListDes2: '',
+                tariffServicesListTitle3: 'Реклама для мобильных',
+                tariffServicesListDes3: 'общая, не выделяется отдельным объявлением',
+                tariffServicesListTitle4: 'Поисковая и баннерная реклама',
+                tariffReccomendBudget: 'от $ 600',
+              }
+            ],
             serviceDescription: 'ООО «TheLead Media» предлагает профессиональные услуги копирайтинга в Ташкенте и других городах Узбекистана.<br><br>Работы по написанию, корректировке и редактированию текстов проводят квалифицированные специалисты с большим опытом.<br><br>Помощь копирайтеров может предоставляться отдельно или в комплексе с другими сео-услугами компании. Качество обслуживания сочетается с приемлемой для Узбекистана стоимостью копирайтинга (от 50 тыс. сум за тысячу знаков с пробелами).<br><br>Ознакомьтесь с общим описанием услуги, предлагаемой на этой странице, основными принципами и методами нашей работы.',
             seriveServicesTitle: 'Услуги <span>копирайтинга</span>',
             serviceCardTitle1: 'qwe',
@@ -528,6 +1002,14 @@
         ],
         currentService: null,
         currentSlug: null,
+        options: [
+              { value: "Создание WEB-сайтов", label: "Создание WEB-сайтов" },
+              { value: "SEO-продвижение", label: "SEO-продвижение" },
+              { value: "Контекстная реклама в Google и Яндекс", label: "Контекстная реклама в Google и Яндекс" },
+              { value: "Продвижение на GoogleMaps", label: "Продвижение на GoogleMaps" },
+              { value: "Продвижение на Яндекс.Карты", label: "Продвижение на Яндекс.Карты" },
+              { value: "Услуги копирайтинга", label: "Услуги копирайтинга" },
+            ],
       }
     },
     created() {
@@ -557,7 +1039,20 @@
       this.$refs.serviceAccordion2.isOpen = false;
       this.$refs.serviceAccordion3.isOpen = false;
       this.$refs.innerAccordion.isOpen = true;
-    }
+    },
+    methods: {
+    scrollToListItem(categoryId) {
+      const listItem = document.querySelector(`#list-item-${categoryId}`);
+      if (listItem) {
+        const yOffset = -150;
+        const y = listItem.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({top: y, behavior: 'smooth'});
+      }
+    },
+    openModal() {
+        this.$refs.modal.show();
+    },
+  },
   }
   </script>
   <style scoped>
@@ -749,7 +1244,116 @@
   }
   .servicesSlider{
     margin: 100px 0;
-  }  
+  }
+  /* tariff cards */
+  .tariff-card{
+    width: 100%;
+    background: var(--gradRadial1);
+    padding: 35px 50px 50px;
+    border: 2px solid transparent;
+    border-image:  linear-gradient(22.06deg, #1C7095 0%, #0E1531 100%);
+    border-image-slice: 1;
+    margin-bottom: 50px;
+  }
+  .tariff-card_line{
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #1F355E;
+    margin: 30px 0;
+  }
+  .tariff-services,
+  .tariff-payment{
+    width: 47%;
+  }
+  .tariff-card h6{
+    color: var(--textYellow);
+  }
+  .tariff-card_header h6{
+    font-size: 44px;
+    line-height: 62px;
+    font-weight: 600;
+    margin-right: 35px;
+  }
+  .tariff-card_header p,
+  .tariff-card_body h6{
+    font-size: 22px;
+    line-height: 31px;
+  }
+  .tariff-card_body h6{
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  .tariff-payment h5,
+  .tariff-services span{
+    font-size: 22px;
+    line-height: 31px;
+    margin-bottom: 5px;
+  }
+  .tariff-payment h5 span{
+    font-weight: 600;
+  }
+  .tariff-card_body p,
+  .tariff-warning p{
+    font-size: 18px;
+    line-height: 25px;
+    color: var(--textBlue1);
+  }
+  .tariff-services ul{
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  .tariff-services li{
+    list-style: disc;
+  }
+  .tariff-warning p:last-of-type{
+    margin-top: 10px;
+  }
+  .tariff-warning p span{
+    color: var(--btnRed2);
+    margin-right: 5px;
+  }
+  .tariff-card_footer{
+    margin-top: 30px;
+    gap: 50px;
+  }
+  .tariff-budget{
+    border: 2px solid var(--backBlack2);
+    width: 100%;
+    padding: 10px 20px;
+  }
+  .tariff-budget p{
+    font-size: 30px;
+    line-height: 42px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tariff-budget_text p{
+    font-size: 22px;
+    line-height: 31px;
+    font-weight: 400;
+  }
+  .tariff-budget_text span{
+    font-size: 18px;
+    line-height: 25px;
+  }
+  .tariff-card_footer button{
+    font-size: 22px;
+    line-height: 31px;
+    padding: 21px 30px;
+    border: 1px solid var(--btnRed2);
+    color: var(--btnRed2);
+    background: none;
+    white-space: nowrap;
+    max-width: 250px;
+  }
+  .subAccordion .accordion-content a.active{
+  color: white;
+}
+
+
 
   @media (max-width:1400px){
     .header{
@@ -784,6 +1388,13 @@
     .service-point{
       width: 100%;
     }
+    .tariff-services,
+    .tariff-payment{
+      width: 100%;
+    }
+    .tariff-services{
+      margin-top: 15px;
+    }
   }
   @media (max-width:992px){
     .header{
@@ -798,6 +1409,13 @@
     .service-point{
       width: 48%;
     }
+    .tariff-services,
+    .tariff-payment{
+      width: 48%;
+    }
+    .tariff-services{
+      margin-top: unset;
+    }
   }
   @media (max-width:768px){
     .mainHeader{
@@ -809,6 +1427,16 @@
     }
     .service-point{
       width: 100%;
+    }
+    .tariff-services,
+    .tariff-payment{
+      width: 100%;
+    }
+    .tariff-services{
+      margin-top: 15px;
+    }
+    .tariff-card{
+      padding: 20px;
     }
   }
   @media (max-width:576px){
@@ -888,6 +1516,44 @@
       font-size: 18px;
       line-height: 25px;
       margin-top: 10px;
+    }
+    .tariff-card_header h6{
+      font-size: 30px;
+      line-height: 40px;
+    }
+    .tariff-card_header p,
+    .tariff-card_body h6,
+    .tariff-payment h5,
+    
+    .tariff-card_body p
+    {
+      font-size: 18px;
+      line-height: 25px;
+    }
+    .tariff-warning p{
+      font-size: 16px;
+      line-height: 22px;
+    }
+    .tariff-services span{
+      font-size: 20px;
+      line-height: 28px;
+    }
+    .tariff-budget_text p{
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 400;
+      white-space: normal;
+    }
+    .tariff-budget_text span{
+      font-size: 16px;
+      line-height: 22px;
+    }
+    .tariff-budget p{
+      font-size: 28px;
+      line-height: 39px;
+    }
+    .tariff-card_footer button{
+      width: 100%;
     }
   }
 </style>
